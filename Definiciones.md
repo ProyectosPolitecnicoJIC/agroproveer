@@ -1,0 +1,28 @@
+# Herramientas y Tecnologías Utilizadas
+
+- Lenguaje de programación utilizado
+    - Backend: 
+      - Node.js (Express.js)
+      - Java (Spring Boot)
+    - Frontend: 
+      - Angular
+- IDE
+  - Visual Studio Code.
+  - IntelliJ IDEA. 
+- SDK
+  - Java SDK 17
+  - Node.js 20
+- Entorno de desarrollo
+  - Docker
+  - Docker Compose
+- Tipo de Base de Datos (SQL o NoSQL)
+  - SQL
+- Motor de la DB
+  - MySQL
+- Microservicios, Servicios o APIs desarrolladas para el funcionamiento de la aplicación
+  - Productos
+  - Usuarios
+- Plataforma utilizada para el despliegue de la solución (On Premise, Cloud, Híbrida)
+  - On Premise
+- Método de trabajo del equipo (Cascada o Agile)   
+  - Agile
