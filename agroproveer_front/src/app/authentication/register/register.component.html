@@ -1,0 +1,20 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- CORREO -->
+    <app-form-input label="Correo electronico" placeholder="" icon="person" inputType="email" [control]="Correo"
+        [enabled]="true" [mandatory]="true" />
+    <!-- CONTRASEÑA -->
+    <app-form-input label="Contraseña" placeholder="" icon="lock" inputType="password" [control]="Contrasena"
+        [enabled]="true" [mandatory]="true" [showTogglePassword]="true" />
+    <!-- CONFIRMAR CONTRASEÑA -->
+    <app-form-input label="Confirmar contraseña" placeholder="" icon="lock" inputType="password" [control]="ConfirmarContrasena"
+        [enabled]="true" [mandatory]="true" [showTogglePassword]="true" />
+    <!-- NOMBRE -->
+    <app-form-input label="Nombre" placeholder="" icon="person" inputType="text" [control]="Nombre" [enabled]="true"
+        [mandatory]="true" />
+    <!-- APELLIDO -->
+    <app-form-input label="Apellido" placeholder="" icon="person" inputType="text" [control]="Apellido" [enabled]="true"
+        [mandatory]="true" />
+    
+
+
+</form>
