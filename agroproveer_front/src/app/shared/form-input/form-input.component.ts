@@ -26,7 +26,7 @@ export class FormInputComponent {
   @Input() hint: string = "";
   @Input() mandatory: boolean = false;
   @Input() enabled: boolean = true;
-
+ 
   passwordVisible: boolean = false;
 
   get getInputType(): string {

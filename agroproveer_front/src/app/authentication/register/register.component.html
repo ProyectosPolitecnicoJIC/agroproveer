@@ -1,20 +1,34 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <!-- CORREO -->
-    <app-form-input label="Correo electronico" placeholder="" icon="person" inputType="email" [control]="Correo"
+    <app-form-input label="Correo electronico" placeholder="" icon="person" inputType="email" [control]="CorreoControl"
         [enabled]="true" [mandatory]="true" />
     <!-- CONTRASEÑA -->
-    <app-form-input label="Contraseña" placeholder="" icon="lock" inputType="password" [control]="Contrasena"
+    <app-form-input label="Contraseña" placeholder="" icon="lock" inputType="password" [control]="ContrasenaControl"
         [enabled]="true" [mandatory]="true" [showTogglePassword]="true" />
     <!-- CONFIRMAR CONTRASEÑA -->
-    <app-form-input label="Confirmar contraseña" placeholder="" icon="lock" inputType="password" [control]="ConfirmarContrasena"
-        [enabled]="true" [mandatory]="true" [showTogglePassword]="true" />
+    <app-form-input label="Confirmar contraseña" placeholder="" icon="lock" inputType="password"
+        [control]="ConfirmarContrasenaControl" [enabled]="true" [mandatory]="true" [showTogglePassword]="true" />
     <!-- NOMBRE -->
-    <app-form-input label="Nombre" placeholder="" icon="person" inputType="text" [control]="Nombre" [enabled]="true"
-        [mandatory]="true" />
+    <app-form-input label="Nombre" placeholder="" icon="person" inputType="text" [control]="NombreControl"
+        [enabled]="true" [mandatory]="true" />
     <!-- APELLIDO -->
-    <app-form-input label="Apellido" placeholder="" icon="person" inputType="text" [control]="Apellido" [enabled]="true"
-        [mandatory]="true" />
-    
-
+    <app-form-input label="Apellido" placeholder="" icon="person" inputType="text" [control]="ApellidoControl"
+        [enabled]="true" [mandatory]="true" />
+    <!-- TIPO DE DOCUMENTO -->
+    <app-form-select [control]="DocumentoControl" label="Tipo de documento" [options]="documentTypes" [enabled]="true"
+        [mandatory]="true" icon="person" />
+    <!-- NUMERO DE DOCUMENTO -->
+    <app-form-input label="Documento" placeholder="" icon="supervisor_account" inputType="text"
+        [control]="DocumentoControl" [enabled]="true" [mandatory]="true" />
+    <!-- TELEFONO -->
+    <app-form-input label="Teléfono" placeholder="" icon="phone" inputType="number" [control]="TelefonoControl"
+        [enabled]="true" [mandatory]="true" />
+    <!-- DEPARTAMENTO -->
+    <app-form-select 
+    label="Departamentos"
+    placeholder=""
+    [control]="DepartamentoControl"    
+    [options]="departamentosList"
+    />
 
 </form>
