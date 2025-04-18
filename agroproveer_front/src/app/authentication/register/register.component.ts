@@ -5,8 +5,6 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DocumentTypesService } from '../../core/services/document-types.service';
 import { DepartamentosService } from '../../core/services/departamentos.service';
 import { OnInit } from '@angular/core';
-import { map, Observable, window } from 'rxjs';
-import { Departamento } from '../../models/departamento.interface';
 
 @Component({
   selector: 'app-register',
@@ -61,16 +59,14 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.documentTypes = this.documentTypesService.getDocumentTypes();
-    this.departamentosService.getDepartamentos().pipe(
-      map((departamentos: Departamento[]) => 
-        departamentos.map((li: Departamento) => ({
-          value: li.id,
-          label: li.name
+    this.departamentosService.getDepartamentos().subscribe(
+      deps => {
+        this.departamentosList = deps.map(i => ({
+          value: i.id.toString(),
+          label: i.name
         }))
-      )
-    ).subscribe(transformados => {
-      this.departamentosList = transformados;
-    });
+      }
+    )
 
   }
 

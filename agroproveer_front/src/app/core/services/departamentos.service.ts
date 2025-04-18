@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Departamento } from '../../models/departamento.interface';
 
 @Injectable({
@@ -8,15 +8,20 @@ import { Departamento } from '../../models/departamento.interface';
 })
 export class DepartamentosService {
 
-  private readonly url : string = "https://api-colombia.com/api/v1/Department"
+  private readonly url: string = "https://api-colombia.com/api/v1/Department"
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
   }
 
-  getDepartamentos(): Observable<any> {
-    console.log(this.http.get<any>(this.url));
-    return this.http.get(this.url);
+  getDepartamentos(): Observable<Departamento[]> {
+    return this.http.get<any[]>(this.url).pipe(
+      map(response => {
+        return response.map(department => ({
+          id: department.id,
+          name: department.name,   
+        }));
+      })
+    );
   }
-
 }
 
