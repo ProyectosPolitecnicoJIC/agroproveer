@@ -8,7 +8,7 @@ import { Departamento } from '../../models/departamento.interface';
 })
 export class DepartamentosService {
 
-  private readonly url: string = "https://api-colombia.com/api/v1/Department"
+  private readonly url: string = "https://api-colombia.com/api/v1/Department?sortBy=name&sortDirection=asc"
 
   constructor(private http: HttpClient) {
   }

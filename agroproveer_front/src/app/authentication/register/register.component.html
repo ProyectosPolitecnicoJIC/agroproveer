@@ -24,11 +24,13 @@
     <app-form-input label="Teléfono" placeholder="" icon="phone" inputType="number" [control]="TelefonoControl"
         [enabled]="true" [mandatory]="true" />
     <!-- DEPARTAMENTO -->
-    <app-form-select 
-    label="Departamentos"
-    placeholder=""
-    [control]="DepartamentoControl"    
-    [options]="departamentosList"
-    />
+    <app-form-select label="Departamentos" placeholder="" [control]="DepartamentoControl"
+        [options]="departamentosList" />
+    <!-- CIUDAD -->
+    <app-form-select label="Ciudad" placeholder="" [control]="MunicipioControl" [options]="ciudadesList" />
+
+    <!-- DIRECCION -->
+    <app-form-input label="Dirección" placeholder="" icon="location_on" inputType="text" [control]="DireccionControl"
+        [enabled]="true" [mandatory]="true" />
 
 </form>

@@ -4,6 +4,7 @@ import { FormSelectComponent } from '../../shared/form-select/form-select.compon
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DocumentTypesService } from '../../core/services/document-types.service';
 import { DepartamentosService } from '../../core/services/departamentos.service';
+import { CiudadesService } from '../../core/services/ciudades.service';
 import { OnInit } from '@angular/core';
 
 @Component({
@@ -47,8 +48,10 @@ export class RegisterComponent implements OnInit {
   DireccionControl = this.form.get('Direccion') as FormControl<string>;
 
   // CONSTRUCTOR
-  constructor(private documentTypesService: DocumentTypesService
-    , private departamentosService: DepartamentosService
+  constructor(
+    private documentTypesService: DocumentTypesService,
+    private departamentosService: DepartamentosService,
+    private ciudadesService: CiudadesService
   ) {
   }
 
@@ -56,6 +59,7 @@ export class RegisterComponent implements OnInit {
   // LISTAS
   documentTypes: { value: string, label: string }[] = [];
   departamentosList: { value: string; label: string }[] = [];
+  ciudadesList: { value: string; label: string }[] = [];
 
   ngOnInit(): void {
     this.documentTypes = this.documentTypesService.getDocumentTypes();
@@ -66,12 +70,32 @@ export class RegisterComponent implements OnInit {
           label: i.name
         }))
       }
-    )
+    );
 
+    // Subscribe to department changes to load cities
+    this.DepartamentoControl.valueChanges.subscribe(deptId => {
+      if (deptId) {
+        this.loadCiudades(deptId);
+      } else {
+        this.ciudadesList = [];
+        this.MunicipioControl.setValue('');
+      }
+    });
   }
 
-
-
+  // Load cities based on selected department
+  loadCiudades(deptId: string): void {
+    this.ciudadesService.getCiudadesByDepartamento(deptId).subscribe(
+      cities => {
+        this.ciudadesList = cities.map(city => ({
+          value: city.id.toString(),
+          label: city.name
+        }));
+        // Reset municipio selection when department changes
+        this.MunicipioControl.setValue('');
+      }
+    );
+  }
 
   onSubmit(): void {
     if (this.form.valid) {
@@ -81,6 +105,4 @@ export class RegisterComponent implements OnInit {
       console.log('Formulario inválido');
     }
   }
-
-
 }
