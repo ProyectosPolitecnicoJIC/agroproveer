@@ -1,0 +1,37 @@
+<button 
+  [ngClass]="{
+    'mat-primary': color === 'primary',
+    'mat-accent': color === 'accent',
+    'mat-warn': color === 'warn',
+    'full-width': fullWidth,
+    'small': size === 'small',
+    'medium': size === 'medium',
+    'large': size === 'large'
+  }"
+  [disabled]="disabled || loading"
+  [attr.mat-raised-button]="variant === 'raised' ? '' : null"
+  [attr.mat-stroked-button]="variant === 'stroked' ? '' : null"
+  [attr.mat-icon-button]="variant === 'icon' ? '' : null"
+  [attr.mat-flat-button]="variant === 'flat' ? '' : null"
+  [attr.color]="color">
+  
+  @if (loading) {
+    <mat-spinner diameter="20" class="button-spinner"></mat-spinner>
+  }
+  
+  @if (!loading) {
+    @if (icon && iconPosition === 'left') {
+      <mat-icon class="icon-left">{{icon}}</mat-icon>
+    }
+    
+    @if (label) {
+      <span>{{label}}</span>
+    } @else {
+      <ng-content></ng-content>
+    }
+    
+    @if (icon && iconPosition === 'right') {
+      <mat-icon class="icon-right">{{icon}}</mat-icon>
+    }
+  }
+</button>

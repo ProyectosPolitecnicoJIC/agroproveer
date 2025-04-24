@@ -1,0 +1,20 @@
+<mat-toolbar class="header">
+  <div class="header-content">
+    <!-- Logo and brand name -->
+    <div class="logo-container" routerLink="/">
+      <img src="../../../assets/logoAgroProveer.png" alt="AgroProveer Logo" class="logo-image">
+      <span class="brand-name">AGRO PROVEER</span>
+    </div>
+
+    <!-- Navigation items -->
+    <nav class="nav-items">
+      @for (item of navigationItems; track item.label) {
+        <a mat-button 
+           [routerLink]="item.route"
+           routerLinkActive="active-link">
+          {{item.label}}
+        </a>
+      }
+    </nav>
+  </div>
+</mat-toolbar>

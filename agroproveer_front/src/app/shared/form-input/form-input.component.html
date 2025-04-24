@@ -1,0 +1,25 @@
+<mat-form-field appearance="outline" class="w-100">
+  <mat-label>{{ label }}</mat-label>
+  <input matInput 
+  [type]="inputType" 
+  [placeholder]="placeholder" 
+  [formControl]="control" 
+  [disabled]="enabled" 
+  [required]="mandatory" 
+  />
+  
+  @if(icon){
+  <mat-icon matPrefix>{{ icon }}</mat-icon>
+  }
+
+  <!-- @if(showTogglePassword){
+  <button mat-icon-button matSuffix type="button" (click)="passwordVisible = !passwordVisible">
+    <mat-icon>{{ passwordVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+  </button>
+  } -->
+
+
+  @if(hint){
+  <mat-hint>{{ hint }}</mat-hint>
+  }
+</mat-form-field>
