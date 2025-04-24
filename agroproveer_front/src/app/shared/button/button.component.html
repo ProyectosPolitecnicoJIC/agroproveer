@@ -1,0 +1,34 @@
+<button 
+  [ngClass]="{
+    'mat-primary': color === 'primary',
+    'mat-accent': color === 'accent',
+    'mat-warn': color === 'warn',
+    'full-width': fullWidth,
+    'small': size === 'small',
+    'medium': size === 'medium',
+    'large': size === 'large'
+  }"
+  [disabled]="disabled || loading"
+  [attr.mat-raised-button]="variant === 'raised' ? '' : null"
+  [attr.mat-stroked-button]="variant === 'stroked' ? '' : null"
+  [attr.mat-icon-button]="variant === 'icon' ? '' : null"
+  [attr.mat-flat-button]="variant === 'flat' ? '' : null"
+  [attr.color]="color">
+  
+  
+  
+  <mat-spinner *ngIf="loading" diameter="20" class="button-spinner"></mat-spinner>
+  
+  <ng-container *ngIf="!loading">
+    <mat-icon *ngIf="icon && iconPosition === 'left'" class="icon-left">
+      {{icon}}
+    </mat-icon>
+    
+    <span *ngIf="label">{{label}}</span>
+    <ng-content></ng-content>
+    
+    <mat-icon *ngIf="icon && iconPosition === 'right'" class="icon-right">
+      {{icon}}
+    </mat-icon>
+  </ng-container>
+</button>

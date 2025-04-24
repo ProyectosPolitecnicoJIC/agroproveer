@@ -1,0 +1,92 @@
+.footer {
+  background-color: #f5f5f5;
+  padding: 40px 0 20px;
+  margin-top: auto;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footer-section h3 {
+  color: #333;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.footer-section p {
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #1976d2;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #1976d2;
+}
+
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Add padding to the main content to prevent footer overlap */
+:host {
+  display: block;
+  min-height: 100vh;
+  padding-bottom: 300px; /* Adjust this value based on your footer height */
+}

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormInputComponent } from '../../shared/form-input/form-input.component';
 import { FormSelectComponent } from '../../shared/form-select/form-select.component';
+import { ButtonComponent } from '../../shared/button/button.component';
+import { ButtonType, ButtonVariant, ButtonSize} from '../../shared/button/button.types';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DocumentTypesService } from '../../core/services/document-types.service';
 import { DepartamentosService } from '../../core/services/departamentos.service';
@@ -14,6 +16,7 @@ import { OnInit } from '@angular/core';
     FormInputComponent,
     ReactiveFormsModule,
     FormSelectComponent,
+    ButtonComponent
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -27,7 +30,6 @@ export class RegisterComponent implements OnInit {
     Apellido: new FormControl<string>(''),
     TipoDocumento: new FormControl<string>(''),
     Documento: new FormControl<string>(''),
-    RazonSocial: new FormControl<string>(''),
     Telefono: new FormControl<string>(''),
     Departamento: new FormControl<string>(''),
     Municipio: new FormControl<string>(''),
@@ -41,7 +43,6 @@ export class RegisterComponent implements OnInit {
   ApellidoControl = this.form.get('Apellido') as FormControl<string>;
   TipoDocumentoControl = this.form.get('TipoDocumento') as FormControl<string>;
   DocumentoControl = this.form.get('Documento') as FormControl<string>;
-  RazonSocialControl = this.form.get('RazonSocial') as FormControl<string>;
   TelefonoControl = this.form.get('Telefono') as FormControl<string>;
   DepartamentoControl = this.form.get('Departamento') as FormControl<string>;
   MunicipioControl = this.form.get('Municipio') as FormControl<string>;
@@ -54,6 +55,11 @@ export class RegisterComponent implements OnInit {
     private ciudadesService: CiudadesService
   ) {
   }
+
+  // ENUMS
+  buttonType = ButtonType;
+  buttonVariant = ButtonVariant;
+  buttonSize = ButtonSize;
 
 
   // LISTAS

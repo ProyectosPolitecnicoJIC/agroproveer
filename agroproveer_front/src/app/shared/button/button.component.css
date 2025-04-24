@@ -1,0 +1,38 @@
+.full-width {
+  width: 100%;
+}
+
+.small {
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+.medium {
+  font-size: 14px;
+  padding: 6px 12px;
+}
+
+.large {
+  font-size: 16px;
+  padding: 8px 16px;
+}
+
+.icon-left {
+  margin-right: 8px;
+}
+
+.icon-right {
+  margin-left: 8px;
+}
+
+.button-spinner {
+  margin-right: 8px;
+}
+
+/* Ensure proper alignment of content */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+

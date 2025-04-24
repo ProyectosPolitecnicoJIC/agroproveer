@@ -1,0 +1,44 @@
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.logo-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.menu-container {
+  display: flex;
+  align-items: center;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Add some spacing below the header to prevent content from being hidden */
+:host {
+  display: block;
+  margin-bottom: 64px;
+}
