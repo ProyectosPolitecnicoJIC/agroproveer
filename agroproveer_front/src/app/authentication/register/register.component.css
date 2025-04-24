@@ -1,17 +1,65 @@
-.fieldset {
-    margin-bottom: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 50%;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0px;
+    height: 100%;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    align-items: start;
+}
+
+.fieldset {
+    margin-bottom: 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: var(--radius-1);
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: fit-content;
 }
 
 .fieldset h3 {
-    margin-bottom: 15px;
+    margin: 0;
     font-size: 18px;
+    color: #333;
+}
+
+/* Ensure form components take full width */
+app-form-input,
+app-form-select {
+    width: 100%;
+}
+
+/* Style for the submit button container */
+.button-container {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    width: 100%;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: var(--radius-1);
+    margin-top: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
     
+    .fieldset {
+        margin-bottom: 0;
+    }
 }

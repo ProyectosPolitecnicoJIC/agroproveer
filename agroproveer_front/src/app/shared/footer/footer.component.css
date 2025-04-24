@@ -1,12 +1,9 @@
 .footer {
-  background-color: #f5f5f5;
+  background-color: var(--color-4);
   padding: 40px 0 20px;
-  margin-top: auto;
   width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: auto; /* Empuja el footer al final cuando hay espacio */
 }
 
 .footer-content {
@@ -25,14 +22,14 @@
 }
 
 .footer-section h3 {
-  color: #333;
+  color: var(--color-1);
   margin: 0;
   font-size: 18px;
   font-weight: 500;
 }
 
 .footer-section p {
-  color: #666;
+  color: var(--color-1);
   margin: 0;
   line-height: 1.5;
 }
@@ -48,13 +45,14 @@
 }
 
 .footer-section ul li a {
-  color: #666;
+  color: var(--color-1);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .footer-section ul li a:hover {
-  color: #1976d2;
+  color: var(--color-1);
+  opacity: 0.8;
 }
 
 .social-links {
@@ -63,23 +61,24 @@
 }
 
 .social-links a {
-  color: #666;
+  color: var(--color-1);
   transition: color 0.3s ease;
 }
 
 .social-links a:hover {
-  color: #1976d2;
+  color: var(--color-1);
+  opacity: 0.8;
 }
 
 .footer-bottom {
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--color-1);
   text-align: center;
 }
 
 .footer-bottom p {
-  color: #666;
+  color: var(--color-1);
   margin: 0;
   font-size: 14px;
 }
@@ -87,6 +86,4 @@
 /* Add padding to the main content to prevent footer overlap */
 :host {
   display: block;
-  min-height: 100vh;
-  padding-bottom: 300px; /* Adjust this value based on your footer height */
 }

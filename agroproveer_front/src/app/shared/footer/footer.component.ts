@@ -16,11 +16,4 @@ import { RouterModule } from '@angular/router';
 })
 export class FooterComponent {
   currentYear = new Date().getFullYear();
-  
-  socialLinks = [
-    { icon: 'facebook', url: 'https://facebook.com' },
-    { icon: 'twitter', url: 'https://twitter.com' },
-    { icon: 'instagram', url: 'https://instagram.com' },
-    { icon: 'linkedin', url: 'https://linkedin.com' }
-  ];
 }

@@ -15,20 +15,23 @@
   [attr.mat-flat-button]="variant === 'flat' ? '' : null"
   [attr.color]="color">
   
+  @if (loading) {
+    <mat-spinner diameter="20" class="button-spinner"></mat-spinner>
+  }
   
-  
-  <mat-spinner *ngIf="loading" diameter="20" class="button-spinner"></mat-spinner>
-  
-  <ng-container *ngIf="!loading">
-    <mat-icon *ngIf="icon && iconPosition === 'left'" class="icon-left">
-      {{icon}}
-    </mat-icon>
+  @if (!loading) {
+    @if (icon && iconPosition === 'left') {
+      <mat-icon class="icon-left">{{icon}}</mat-icon>
+    }
     
-    <span *ngIf="label">{{label}}</span>
-    <ng-content></ng-content>
+    @if (label) {
+      <span>{{label}}</span>
+    } @else {
+      <ng-content></ng-content>
+    }
     
-    <mat-icon *ngIf="icon && iconPosition === 'right'" class="icon-right">
-      {{icon}}
-    </mat-icon>
-  </ng-container>
+    @if (icon && iconPosition === 'right') {
+      <mat-icon class="icon-right">{{icon}}</mat-icon>
+    }
+  }
 </button>
