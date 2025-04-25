@@ -1,0 +1,20 @@
+<div class="login-container">
+    <div class="login-form-container">
+        <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+            <h2>Bienvenido a AgroProveer</h2>
+            <div>
+                <app-form-input [control]="emailControl" label="Correo electrónico" icon="email" [mandatory]="true" />
+            </div>
+            <div>
+                <app-form-input [control]="passwordControl" label="Contraseña" inputType="password" icon="lock" [mandatory]="true"/>
+            </div>
+            <div>
+                <app-button [type]="buttonType.PRIMARY" [disabled]="formLogin.invalid" label="Iniciar sesión"/>
+            </div>
+        </form>
+        <div class="image-container">
+            <img src="../../../assets/logoAgroProveer.png" alt="login">
+        </div>
+    </div>
+    
+</div>

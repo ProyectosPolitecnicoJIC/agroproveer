@@ -33,7 +33,4 @@ export class FormInputComponent {
     if (this.inputType !== 'password') return this.inputType;
     return this.passwordVisible ? 'text' : 'password';
   }
-
-
-
 }

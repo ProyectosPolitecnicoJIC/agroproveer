@@ -8,13 +8,36 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --color-3: #e2b1cf;
     --color-4: #b9e4c9;
     --color-5: #a1d8e3;
-
+    --color-6: #f8e1b4;
+    --color-7: #f3d3c3;
+    --color-8: #e2b1cf;
+    --color-9: #b9e4c9;
+    --color-10: #a1d8e3;
+    --color-11: #f8e1b4;
     --color-background: #ffffff;
 
+
+    --green-1: #F7FEEF;
+    --green-2: #CBDDB5;
+    --green-3: #A8CA7E;
+    --green-4: #97B770;
+    --green-5: #608334;
+    --green-6: #334D1A;
+    
 
     --radius-0: 5px;
     --radius-1: 10px;
     --radius-2: 20px;
 
+    --padding-0: 10px;
+    --padding-1: 20px;
+    --padding-2: 30px;
+    --padding-3: 40px;
+    --padding-4: 50px;
+
+    --gap-0: 10px;
+    --gap-1: 20px;
+    --gap-2: 30px;
+    --gap-3: 40px;
   }
   
