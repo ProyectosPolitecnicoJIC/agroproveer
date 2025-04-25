@@ -20,10 +20,9 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   navigationItems = [
-    { label: 'Home', route: '/home' },
-    { label: 'Categorias', route: '/categorias' },
+    { label: 'Inicio', route: '/home' },
+    { label: 'Sobre nosotros', route: '/about' },
     { label: 'Login', route: '/login' },
     { label: 'Registro', route: '/registro' },
-    { label: 'Carrito', route: '/carrito' }
   ];
 }

@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, AbstractControl, FormControl } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-form-select',
@@ -17,7 +16,7 @@ import { Input } from '@angular/core';
   templateUrl: './form-select.component.html',
   styleUrl: './form-select.component.css'
 })
-export class FormSelectComponent {
+export class FormSelectComponent implements OnInit {
   @Input() control!: FormControl;
   @Input() label!: string;
   @Input() options: { value: string; label: string }[] = [];
@@ -25,4 +24,10 @@ export class FormSelectComponent {
   @Input() mandatory: boolean = false;
   @Input() enabled: boolean = true;
   @Input() icon: string = "";
+
+  ngOnInit() {
+    if (!this.enabled) {
+      this.control.disable();
+    }
+  }
 }
