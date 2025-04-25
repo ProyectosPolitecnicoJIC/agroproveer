@@ -1,0 +1,33 @@
+<section>
+    <div class="home-container">
+        <div class="home-title-container">
+            <h1>La mejor forma de comercializar tus productos</h1>
+            <app-button label="Acerca de nosotros" />
+        </div>
+        <div class="home-image-container">
+            <img src="../../../assets/campesinoscu.jpg" alt="campesinoscu">
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="home-title-container">
+        <h1>Beneficios</h1>
+    </div>
+    <div class="beneficios-title-description">
+        <p>En nuestra plataforma, nos esforzamos por ofrecerte una experiencia de compra única y satisfactoria. Aquí te explicamos por qué deberías elegirnos:</p>
+    </div>
+</section>
+
+<section>
+    <div class="beneficios-container">
+        @for (beneficio of beneficios; track beneficio.title) {
+            <div class="beneficio-item">
+                <img [src]="beneficio.image" [alt]="beneficio.title">
+                <h2>{{ beneficio.title }}</h2>
+                <p>{{ beneficio.description }}</p>
+            </div>
+        }
+    </div>
+
+</section>

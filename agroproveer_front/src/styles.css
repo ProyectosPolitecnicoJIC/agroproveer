@@ -39,5 +39,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --gap-1: 20px;
     --gap-2: 30px;
     --gap-3: 40px;
+
+    --margin-0: 10px;
+    --margin-1: 20px;
+    --margin-2: 30px;
+    --margin-3: 40px;
+    --margin-4: 50px;
+    --margin-5: 60px;
+    --margin-6: 70px;
+    --margin-7: 80px;
+    --margin-8: 90px;
+    --margin-9: 100px;
+    --margin-10: 110px;
+    --margin-11: 120px;
   }
   
