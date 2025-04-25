@@ -17,5 +17,4 @@
 .main-content {
   flex: 1;
   width: 100%;
-  padding: 80px 20px 40px; /* Considerando el header fijo */
 }
