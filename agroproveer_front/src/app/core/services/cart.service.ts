@@ -1,20 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-
-export interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-}
+import { Producto } from '../../models/producto.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private readonly STORAGE_KEY = 'cart_items';
-  private cartItems: CartItem[] = [];
-  private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
+  private cartItems: Producto[] = [];
+  private cartItemsSubject = new BehaviorSubject<Producto[]>([]);
 
   constructor() {
     this.loadCartFromStorage();
@@ -32,18 +26,18 @@ export class CartService {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.cartItems));
   }
 
-  getItems(): CartItem[] {
+  getItems(): Producto[] {
     return this.cartItems;
   }
 
-  getItemsObservable(): Observable<CartItem[]> {
+  getItemsObservable(): Observable<Producto[]> {
     return this.cartItemsSubject.asObservable();
   }
 
-  addItem(item: CartItem): void {
+  addItem(item: Producto): void {
     const existingItem = this.cartItems.find(i => i.id === item.id);
     if (existingItem) {
-      existingItem.quantity += item.quantity;
+      existingItem.cantidad += item.cantidad;
     } else {
       this.cartItems.push(item);
     }
