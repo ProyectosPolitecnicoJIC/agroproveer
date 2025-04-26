@@ -1,4 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <h1 class="title-register">Registro</h1>
     <div class="form-grid">
         <div class="fieldset">
             <h3>Datos personales</h3>
@@ -45,7 +47,7 @@
         </div>
 
         <div class="button-container">
-            <app-button label="Registrar" [type]="buttonType.PRIMARY" [disabled]="form.invalid" />
+            <app-button label="Registrar" [type]="buttonType.PRIMARY" [disabled]="!form.valid" />
         </div>
     </div>
 </form>

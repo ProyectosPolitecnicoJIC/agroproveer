@@ -1,0 +1,6 @@
+<div class="cart-icon" (click)="navigateToCart()">
+  <mat-icon>shopping_cart</mat-icon>
+  <span class="cart-count" *ngIf="cartService.getItems().length > 0">
+    {{cartService.getItems().length}}
+  </span>
+</div>

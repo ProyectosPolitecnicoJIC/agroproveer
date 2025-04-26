@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormInputComponent } from '../../shared/form-input/form-input.component';
 import { FormSelectComponent } from '../../shared/form-select/form-select.component';
 import { ButtonComponent } from '../../shared/button/button.component';
 import { ButtonType, ButtonVariant, ButtonSize} from '../../shared/button/button.types';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DocumentTypesService } from '../../core/services/document-types.service';
 import { DepartamentosService } from '../../core/services/departamentos.service';
 import { CiudadesService } from '../../core/services/ciudades.service';
-import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-register',
@@ -23,17 +22,17 @@ import { OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
   form = new FormGroup({
-    Correo: new FormControl<string>(''),
-    Contrasena: new FormControl<string>(''),
-    ConfirmarContrasena: new FormControl<string>(''),
-    Nombre: new FormControl<string>(''),
-    Apellido: new FormControl<string>(''),
-    TipoDocumento: new FormControl<string>(''),
-    Documento: new FormControl<string>(''),
-    Telefono: new FormControl<string>(''),
+    Correo: new FormControl<string>('', [Validators.required, Validators.email]),
+    Contrasena: new FormControl<string>('', [Validators.required, Validators.minLength(6)]),
+    ConfirmarContrasena: new FormControl<string>('', [Validators.required]),
+    Nombre: new FormControl<string>('', [Validators.required]),
+    Apellido: new FormControl<string>('', [Validators.required]),
+    TipoDocumento: new FormControl<string>('', [Validators.required]),
+    Documento: new FormControl<string>('', [Validators.required]),
+    Telefono: new FormControl<string>('', [Validators.required]),
     Departamento: new FormControl<string>(''),
     Municipio: new FormControl<string>(''),
-    Direccion: new FormControl<string>('')
+    Direccion: new FormControl<string>('', [Validators.required])
   });
 
   CorreoControl = this.form.get('Correo') as FormControl<string>;
@@ -48,65 +47,71 @@ export class RegisterComponent implements OnInit {
   MunicipioControl = this.form.get('Municipio') as FormControl<string>;
   DireccionControl = this.form.get('Direccion') as FormControl<string>;
 
-  // CONSTRUCTOR
   constructor(
     private documentTypesService: DocumentTypesService,
     private departamentosService: DepartamentosService,
-    private ciudadesService: CiudadesService
+    private ciudadesService: CiudadesService,
+    private cdr: ChangeDetectorRef
   ) {
+    // Inicializar el estado del formulario
+    this.form.statusChanges.subscribe(() => {
+      this.cdr.detectChanges();
+    });
   }
 
-  // ENUMS
   buttonType = ButtonType;
   buttonVariant = ButtonVariant;
   buttonSize = ButtonSize;
 
-
-  // LISTAS
   documentTypes: { value: string, label: string }[] = [];
   departamentosList: { value: string; label: string }[] = [];
   ciudadesList: { value: string; label: string }[] = [];
 
   ngOnInit(): void {
+    // Cargar tipos de documento
     this.documentTypes = this.documentTypesService.getDocumentTypes();
-    this.departamentosService.getDepartamentos().subscribe(
-      deps => {
+
+    // Cargar departamentos
+    this.departamentosService.getDepartamentos().subscribe({
+      next: (deps) => {
         this.departamentosList = deps.map(i => ({
           value: i.id.toString(),
           label: i.name
-        }))
+        }));
+        this.cdr.detectChanges();
       }
-    );
+    });
 
-    // Subscribe to department changes to load cities
-    this.DepartamentoControl.valueChanges.subscribe(deptId => {
-      if (deptId) {
-        this.loadCiudades(deptId);
-      } else {
-        this.ciudadesList = [];
-        this.MunicipioControl.setValue('');
+    // Suscribirse a cambios en el departamento
+    this.DepartamentoControl.valueChanges.subscribe({
+      next: (deptId) => {
+        if (deptId) {
+          this.loadCiudades(deptId);
+        } else {
+          this.ciudadesList = [];
+          this.MunicipioControl.setValue('');
+          this.cdr.detectChanges();
+        }
       }
     });
   }
 
-  // Load cities based on selected department
   loadCiudades(deptId: string): void {
-    this.ciudadesService.getCiudadesByDepartamento(deptId).subscribe(
-      cities => {
+    this.ciudadesService.getCiudadesByDepartamento(deptId).subscribe({
+      next: (cities) => {
         this.ciudadesList = cities.map(city => ({
           value: city.id.toString(),
           label: city.name
         }));
-        // Reset municipio selection when department changes
         this.MunicipioControl.setValue('');
+        this.cdr.detectChanges();
       }
-    );
+    });
   }
 
   onSubmit(): void {
     if (this.form.valid) {
       console.log(this.form.value);
-      // Aquí puedes realizar la lógica de envío del formulario
     } else {
       console.log('Formulario inválido');
     }

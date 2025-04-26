@@ -1,7 +1,7 @@
 <mat-form-field appearance="outline" class="w-100">
     <mat-label>{{label}}</mat-label>
     
-    <mat-select [formControl]="control" [disabled]="!enabled" [required]="mandatory" [placeholder]="placeholder">
+    <mat-select [formControl]="control" [required]="mandatory" [placeholder]="placeholder">
         @for(opt of options; track opt.value) {
         <mat-option [value]="opt.value">
             {{opt.label}}
@@ -9,6 +9,5 @@
         }@empty {
         <mat-option disabled>No hay opciones disponibles</mat-option>
         }
-        
     </mat-select>
 </mat-form-field>

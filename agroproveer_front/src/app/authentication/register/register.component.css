@@ -28,10 +28,16 @@ form {
     height: fit-content;
 }
 
+.fieldset:focus-within {
+    border-color: var(--color-1);
+    box-shadow: 0 0 10px 0 var(--color-4);
+}
+
 .fieldset h3 {
     margin: 0;
     font-size: 18px;
-    color: #333;
+    color: var(--color-1);
+    font-weight: 600;
 }
 
 /* Ensure form components take full width */
@@ -47,9 +53,9 @@ app-form-select {
     justify-content: flex-end;
     padding: 20px;
     width: 100%;
-    background-color: #f9f9f9;
+    background-color: var(--green-1);
     border: 1px solid #ccc;
-    border-radius: var(--radius-1);
+    border-radius: var(--radius-2);
     margin-top: 0;
 }
 
@@ -62,4 +68,12 @@ app-form-select {
     .fieldset {
         margin-bottom: 0;
     }
+}
+
+.title-register {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-1);
+    text-align: center;
+    margin-bottom: 2rem;
 }
