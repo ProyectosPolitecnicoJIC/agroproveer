@@ -55,7 +55,7 @@ export class ShoppingcartComponent implements OnInit {
       descripcion: 'Descripción del producto 2',
       precio: 200,
       cantidad: 2,
-      imagen: 'https://via.placeholder.com/150',
+      imagen: '../../assets/Beneficio 1.jpg',
       vendedor_id: 1,
       categoria_id: 1
     },
@@ -65,7 +65,7 @@ export class ShoppingcartComponent implements OnInit {
       descripcion: 'Descripción del producto 3',
       precio: 300,
       cantidad: 3,
-      imagen: 'https://via.placeholder.com/150',
+      imagen: '../../assets/Beneficio 1.jpg',
       vendedor_id: 1,
       categoria_id: 1
     }, 
@@ -75,7 +75,7 @@ export class ShoppingcartComponent implements OnInit {
       descripcion: 'Descripción del producto 4',
       precio: 400,
       cantidad: 4,  
-      imagen: 'https://via.placeholder.com/150',
+      imagen: '../../assets/Beneficio 1.jpg',
       vendedor_id: 1,
       categoria_id: 1
     }

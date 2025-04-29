@@ -16,7 +16,7 @@
                         <h3>{{ item.nombre }}</h3>
                         <p>{{ item.descripcion }}</p>
                         <p>${{ item.precio | number:'1.0-0' }}</p>
-                        <p>Cantidad: {{ item.cantidad }}</p>
+                        <p>Cantidad: {{ item.cantidad }} </p>
                     </div>
                     <mat-icon (click)="cartService.removeItem(item.id)">delete</mat-icon>
                 </div>
