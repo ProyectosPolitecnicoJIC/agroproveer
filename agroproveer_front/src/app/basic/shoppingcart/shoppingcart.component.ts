@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../core/services/cart.service';
-import { Producto } from '../../models/producto.interface';
+import { ProductoCart } from '../../models/productocart.interface';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../shared/button/button.component';
 import { MatIcon } from '@angular/material/icon';
@@ -20,7 +20,7 @@ import { DecimalPipe } from '@angular/common';
 export class ShoppingcartComponent implements OnInit {
   constructor(public cartService: CartService, public router: Router) {}
 
-  cartItems: Producto[] = [];
+  cartItems: ProductoCart[] = [];
   totalPrice: number = 0;
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class ShoppingcartComponent implements OnInit {
     this.totalPrice = this.cartItems.reduce((total, item) => total + (item.precio * item.cantidad), 0);
   }
 
-  dummyCartItems: Producto[] = [
+  dummyCartItems: ProductoCart[] = [
     {
       id: 1,
       nombre: 'Producto 1',

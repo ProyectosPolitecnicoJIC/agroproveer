@@ -1,8 +1,8 @@
-import { Producto } from "./producto.interface";
+import { ProductoCart } from "./productocart.interface";
 
 export interface Checkout {
     id: number;
-    productos: Producto[];
+    productos: ProductoCart[];
     fecha_venta: Date;
     nombre_comprador: string;
     correo_comprador: string;
