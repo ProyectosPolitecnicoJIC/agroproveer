@@ -20,7 +20,6 @@ import { ProductoCart } from '../../models/productocart.interface';
     FormInputComponent,
     FormSelectComponent,
     DecimalPipe,
-    MatIcon
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
