@@ -1,11 +1,87 @@
+<div class="checkout-container">
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
+    <div class="form-section">
+      <h2>Información Personal</h2>
+      <app-form-input
+        [label]="'Nombre Completo'"
+        [inputType]="'text'"
+        [control]="getControl('nombre_comprador')"
+        [placeholder]="'Ingresa tu nombre completo'"
+        [mandatory]="true"
+      ></app-form-input>
 
+      <app-form-input
+        [label]="'Correo Electrónico'"
+        [inputType]="'email'"
+        [control]="getControl('correo_comprador')"
+        [placeholder]="'ejemplo@correo.com'"
+        [mandatory]="true"
+      ></app-form-input>
 
-<div class="checkout_container">
-    <div class="checkout_form">
-        <h2>Datos del comprador</h2>
-
+      <app-form-input
+        [label]="'Teléfono'"
+        [inputType]="'tel'"
+        [control]="getControl('telefono_comprador')"
+        [placeholder]="'10 dígitos'"
+        [mandatory]="true"
+      ></app-form-input>
     </div>
-    <div class="checkout_summary">
-        <h2>Resumen de la compra</h2>
+
+    <div class="form-section">
+      <h2>Documento de Identidad</h2>
+      <div class="form-row">
+        <app-form-select
+          [label]="'Tipo de Documento'"
+          [control]="getControl('tipo_documento')"
+          [options]="documentTypes"
+          [mandatory]="true"
+        ></app-form-select>
+
+        <app-form-input
+          [label]="'Número de Documento'"
+          [inputType]="'text'"
+          [control]="getControl('documento_comprador')"
+          [placeholder]="'Número de documento'"
+          [mandatory]="true"
+        ></app-form-input>
+      </div>
     </div>
+
+    <div class="form-section">
+      <h2>Dirección de Envío</h2>
+      <app-form-input
+        [label]="'Dirección Completa'"
+        [inputType]="'textarea'"
+        [control]="getControl('direccion_envio')"
+        [placeholder]="'Ingresa tu dirección completa para el envío'"
+        [mandatory]="true"
+      ></app-form-input>
+    </div>
+
+    <div class="form-section">
+      <h2>Método de Pago</h2>
+      <app-form-select
+        [label]="'Selecciona el método de pago'"
+        [control]="getControl('metodo_pago')"
+        [options]="paymentMethods"
+        [mandatory]="true"
+      ></app-form-select>
+    </div>
+
+    <div class="form-section">
+      <h2>Notas Adicionales</h2>
+      <app-form-input
+        [label]="'Notas para la entrega'"
+        [inputType]="'textarea'"
+        [control]="getControl('nota_adicional')"
+        [placeholder]="'Instrucciones especiales para la entrega'"
+      ></app-form-input>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="checkoutForm.invalid" class="submit-button">
+        Confirmar Compra
+      </button>
+    </div>
+  </form>
 </div>
