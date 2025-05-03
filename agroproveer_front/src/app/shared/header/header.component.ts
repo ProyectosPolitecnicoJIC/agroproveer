@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent {
   navigationItems = [
     { label: 'Inicio', route: '/home' },
+    { label: 'Mercado', route: '/mercado' },
     { label: 'Sobre nosotros', route: '/about' },
     { label: 'Login', route: '/login' },
     { label: 'Registro', route: '/registro' },

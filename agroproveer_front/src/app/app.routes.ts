@@ -5,7 +5,7 @@ import { HomeComponent } from './basic/home/home.component';
 import { AboutComponent } from './basic/about/about.component';
 import { ShoppingcartComponent } from './basic/shoppingcart/shoppingcart.component';
 import { CheckoutComponent } from './basic/checkout/checkout.component';
-
+import { ProductosComponent } from './basic/productos/productos.component';
 export const routes: Routes = [
     { path: 'registro', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
@@ -13,5 +13,6 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'cart', component: ShoppingcartComponent },
-    { path: 'checkout', component: CheckoutComponent }
+    { path: 'checkout', component: CheckoutComponent },
+    { path: 'mercado', component: ProductosComponent }
 ];
