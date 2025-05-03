@@ -1,0 +1,84 @@
+<div class="admin-container">
+  <h1>Administración de Productos</h1>
+  
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+    <div class="form-section">
+      <h2>Información Básica</h2>
+      
+      <app-form-input
+        [label]="'Nombre del Producto'"
+        [inputType]="'text'"
+        [control]="getControl('nombre')"
+        [placeholder]="'Ingrese el nombre del producto'"
+        [mandatory]="true"
+      ></app-form-input>
+
+      <app-form-input
+        [label]="'Descripción'"
+        [inputType]="'textarea'"
+        [control]="getControl('descripcion')"
+        [placeholder]="'Ingrese una descripción detallada del producto'"
+        [mandatory]="true"
+      ></app-form-input>
+
+      <app-form-input
+        [label]="'Precio'"
+        [inputType]="'number'"
+        [control]="getControl('precio')"
+        [placeholder]="'Ingrese el precio del producto'"
+        [mandatory]="true"
+      ></app-form-input>
+    </div>
+
+    <div class="form-section">
+      <h2>Ubicación y Categorización</h2>
+      
+      <app-form-input
+        [label]="'Municipio'"
+        [inputType]="'text'"
+        [control]="getControl('municipio')"
+        [placeholder]="'Ingrese el municipio'"
+        [mandatory]="true"
+      ></app-form-input>
+
+      <app-form-select
+        [label]="'Categoría'"
+        [control]="getControl('categoria_id')"
+        [options]="getCategoriasOptions()"
+        [placeholder]="'Seleccione una categoría'"
+        [mandatory]="true"
+      ></app-form-select>
+    </div>
+
+    <div class="form-section">
+      <h2>Imagen del Producto</h2>
+      
+      <app-form-input
+        [label]="'URL de la Imagen'"
+        [inputType]="'text'"
+        [control]="getControl('imagen')"
+        [placeholder]="'Ingrese la URL de la imagen del producto'"
+        [mandatory]="true"
+      ></app-form-input>
+    </div>
+
+    @if (error) {
+      <div class="error-message">
+        {{ error }}
+      </div>
+    }
+
+    <div class="form-actions">
+      <button 
+        type="submit" 
+        [disabled]="productForm.invalid || loading" 
+        class="submit-button"
+      >
+        @if (loading) {
+          <span class="loading-spinner"></span>
+        }
+        {{ loading ? 'Creando...' : 'Crear Producto' }}
+      </button>
+    </div>
+  </form>
+</div>

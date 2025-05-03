@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../core/services/cart.service';
-import { Producto } from '../../models/producto.interface';
+import { ProductoCart } from '../../models/productocart.interface';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../../shared/button/button.component';
 import { MatIcon } from '@angular/material/icon';
@@ -20,7 +20,7 @@ import { DecimalPipe } from '@angular/common';
 export class ShoppingcartComponent implements OnInit {
   constructor(public cartService: CartService, public router: Router) {}
 
-  cartItems: Producto[] = [];
+  cartItems: ProductoCart[] = [];
   totalPrice: number = 0;
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class ShoppingcartComponent implements OnInit {
     this.totalPrice = this.cartItems.reduce((total, item) => total + (item.precio * item.cantidad), 0);
   }
 
-  dummyCartItems: Producto[] = [
+  dummyCartItems: ProductoCart[] = [
     {
       id: 1,
       nombre: 'Producto 1',
@@ -55,7 +55,7 @@ export class ShoppingcartComponent implements OnInit {
       descripcion: 'Descripción del producto 2',
       precio: 200,
       cantidad: 2,
-      imagen: 'https://via.placeholder.com/150',
+      imagen: '../../assets/Beneficio 1.jpg',
       vendedor_id: 1,
       categoria_id: 1
     },
@@ -65,7 +65,7 @@ export class ShoppingcartComponent implements OnInit {
       descripcion: 'Descripción del producto 3',
       precio: 300,
       cantidad: 3,
-      imagen: 'https://via.placeholder.com/150',
+      imagen: '../../assets/Beneficio 1.jpg',
       vendedor_id: 1,
       categoria_id: 1
     }, 
@@ -75,7 +75,7 @@ export class ShoppingcartComponent implements OnInit {
       descripcion: 'Descripción del producto 4',
       precio: 400,
       cantidad: 4,  
-      imagen: 'https://via.placeholder.com/150',
+      imagen: '../../assets/Beneficio 1.jpg',
       vendedor_id: 1,
       categoria_id: 1
     }
