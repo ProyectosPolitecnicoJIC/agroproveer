@@ -7,6 +7,7 @@ import { ShoppingcartComponent } from './basic/shoppingcart/shoppingcart.compone
 import { CheckoutComponent } from './basic/checkout/checkout.component';
 import { ProductosComponent } from './basic/productos/productos.component';
 import { AdminproductosComponent } from './basic/adminproductos/adminproductos.component';
+import { CategoriasComponent } from './basic/categorias/categorias.component';
 export const routes: Routes = [
     { path: 'registro', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: 'cart', component: ShoppingcartComponent },
     { path: 'checkout', component: CheckoutComponent },
     { path: 'mercado', component: ProductosComponent },
-    { path: 'adminproductos', component: AdminproductosComponent }
+    { path: 'adminproductos', component: AdminproductosComponent },
+    { path: 'admincategorias', component: CategoriasComponent }
 ];
