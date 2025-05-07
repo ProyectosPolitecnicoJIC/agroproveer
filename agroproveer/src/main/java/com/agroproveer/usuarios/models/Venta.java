@@ -1,0 +1,47 @@
+package com.agroproveer.usuarios.models;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
+@Table(name = "venta")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Venta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+
+    @Column(name = "fecha_venta")
+    private LocalDateTime fechaVenta = LocalDateTime.now();
+
+    @Column(name = "nombre_completo", nullable = false)
+    private String nombreCompleto;
+
+    @Column(nullable = false)
+    private String correo;
+
+    @Column(name = "direccion_envio", nullable = false)
+    private String direccionEnvio;
+
+    @Column(name = "metodo_pago", nullable = false)
+    private String metodoPago;
+
+    private String telefono;
+
+    private String documento;
+
+    @Column(name = "tipo_documento")
+    private String tipoDocumento;
+
+    private String nota;
+
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<VentaProducto> productosVendidos;
+}
