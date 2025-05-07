@@ -32,11 +32,9 @@ public class Producto {
     @Column(nullable = false)
     private String municipio;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "vendedor_id", nullable = false)
-    private Usuario vendedor;
+    @Column(name = "vendedor_id", nullable = false)
+    private String vendedor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoria_id", nullable = false)
-    private Categoria categoria;
+    @Column(name = "categoria_id", nullable = false)
+    private Long categoria;
 }

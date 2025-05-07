@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "venta")
@@ -11,15 +12,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class  Venta {
+public class Venta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "carrito_id")
-    private Carrito carrito;
+    private String id;
 
     @Column(name = "fecha_venta")
     private LocalDateTime fechaVenta = LocalDateTime.now();
@@ -43,6 +40,8 @@ public class  Venta {
     @Column(name = "tipo_documento")
     private String tipoDocumento;
 
-    @Column(columnDefinition = "TEXT")
     private String nota;
+
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<VentaProducto> productosVendidos;
 }

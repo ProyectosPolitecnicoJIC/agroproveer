@@ -1,6 +1,7 @@
 package com.agroproveer.usuarios.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,36 +11,40 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "nombre_completo", nullable = false)
-    private String nombreCompleto;
-
-    @Column(nullable = false, unique = true)
-    private String correo;
-
-    @Column(nullable = false)
-    private String contrasena;
-
-    @Column(nullable = false)
-    private String telefono;
-
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String documento;
 
-    @Column(name = "tipo_documento")
+    @Column(nullable = false, length = 100)
+    private String nombre;
+
+    @Column(nullable = false, length = 100)
+    private String apellido;
+
+    @Column(nullable = false, unique = true, length = 100)
+    private String correo;
+
+    @Column(nullable = false, length = 255)
+    private String contrasena;
+
+    @Column(length = 20)
+    private String telefono;
+
+    @Column(name = "tipo_documento", length = 20)
     private String tipoDocumento;
 
-    @Column(nullable = false)
+    @Column(length = 255)
     private String direccion;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
+    private String departamento;
+
+    @Column(nullable = false, length = 100)
     private String municipio;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String rol;
 }
