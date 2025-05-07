@@ -1,0 +1,33 @@
+<div class="cart-container">
+    <h2>Carrito de compras</h2>
+    
+    @if (cartItems.length === 0) {
+        <div class="empty-cart">
+            <mat-icon>shopping_cart</mat-icon>
+            <p>Tu carrito está vacío</p>
+            <app-button label="Continuar comprando" (click)="router.navigate(['/products'])"></app-button>
+        </div>
+    } @else {
+        <div class="cart-items">
+            @for (item of cartItems; track item.id) {
+                <div class="cart-item">
+                    <img [src]="item.imagen" alt="Producto">
+                    <div class="cart-item-details">
+                        <h3>{{ item.nombre }}</h3>
+                        <p>{{ item.descripcion }}</p>
+                        <p>${{ item.precio | number:'1.0-0' }}</p>
+                        <p>Cantidad: {{ item.cantidad }} </p>
+                    </div>
+                    <mat-icon (click)="cartService.removeItem(item.id)">delete</mat-icon>
+                </div>
+            }
+        </div>
+        
+        <div class="cart-total">
+            <p>Total: ${{ totalPrice | number:'1.0-0' }}</p>
+        </div>
+        <div class="checkout-button">
+            <app-button label="Finalizar compra" (click)="router.navigate(['/checkout'])"></app-button>
+        </div>
+    }
+</div>

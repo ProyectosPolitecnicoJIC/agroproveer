@@ -1,0 +1,77 @@
+<div class="admin-container">
+  <h1>Administración de Categorías</h1>
+
+  <form [formGroup]="categoriaForm" (ngSubmit)="onSubmit()" class="category-form">
+    <div class="form-section">
+      <h2>{{ editingId ? 'Editar Categoría' : 'Nueva Categoría' }}</h2>
+      
+      <app-form-input
+        [label]="'Nombre'"
+        [inputType]="'text'"
+        [control]="getControl('nombre')"
+        [placeholder]="'Ingrese el nombre de la categoría'"
+        [mandatory]="true"
+      ></app-form-input>
+
+      <app-form-input
+        [label]="'Descripción'"
+        [inputType]="'textarea'"
+        [control]="getControl('descripcion')"
+        [placeholder]="'Ingrese la descripción de la categoría'"
+        [mandatory]="true"
+      ></app-form-input>
+
+      @if (error) {
+        <div class="error-message">
+          {{ error }}
+        </div>
+      }
+
+      <div class="form-actions">
+        @if (editingId) {
+          <button type="button" (click)="cancelEdit()" class="cancel-button">
+            Cancelar
+          </button>
+        }
+        <button 
+          type="submit" 
+          [disabled]="categoriaForm.invalid || loading" 
+          class="submit-button"
+        >
+          @if (loading) {
+            <span class="loading-spinner"></span>
+          }
+          {{ loading ? 'Guardando...' : (editingId ? 'Actualizar' : 'Crear') }}
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="categories-list">
+    <h2>Lista de Categorías</h2>
+    @if (loading && !categorias.length) {
+      <div class="loading-message">Cargando categorías...</div>
+    } @else if (categorias.length === 0) {
+      <div class="empty-message">No hay categorías registradas</div>
+    } @else {
+      <div class="category-grid">
+        @for (categoria of categorias; track categoria.id) {
+          <div class="category-card">
+            <div class="category-content">
+              <h3>{{ categoria.nombre }}</h3>
+              <p>{{ categoria.descripcion }}</p>
+            </div>
+            <div class="category-actions">
+              <button (click)="editCategoria(categoria)" class="edit-button">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button (click)="deleteCategoria(categoria.id!)" class="delete-button">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

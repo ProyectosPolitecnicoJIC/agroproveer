@@ -1,0 +1,79 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0px;
+    height: 100%;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    align-items: start;
+}
+
+.fieldset {
+    margin-bottom: 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: var(--radius-1);
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: fit-content;
+}
+
+.fieldset:focus-within {
+    border-color: var(--color-1);
+    box-shadow: 0 0 10px 0 var(--color-4);
+}
+
+.fieldset h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--color-1);
+    font-weight: 600;
+}
+
+/* Ensure form components take full width */
+app-form-input,
+app-form-select {
+    width: 100%;
+}
+
+/* Style for the submit button container */
+.button-container {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    width: 100%;
+    background-color: var(--green-1);
+    border: 1px solid #ccc;
+    border-radius: var(--radius-2);
+    margin-top: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .fieldset {
+        margin-bottom: 0;
+    }
+}
+
+.title-register {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-1);
+    text-align: center;
+    margin-bottom: 2rem;
+}

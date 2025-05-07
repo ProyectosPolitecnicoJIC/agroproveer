@@ -1,0 +1,89 @@
+.footer {
+  background-color: var(--color-4);
+  padding: 40px 0 20px;
+  width: 100%;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: auto; /* Empuja el footer al final cuando hay espacio */
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footer-section h3 {
+  color: var(--color-1);
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.footer-section p {
+  color: var(--color-1);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: var(--color-1);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: var(--color-1);
+  opacity: 0.8;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  color: var(--color-1);
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--color-1);
+  opacity: 0.8;
+}
+
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-1);
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: var(--color-1);
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Add padding to the main content to prevent footer overlap */
+:host {
+  display: block;
+}

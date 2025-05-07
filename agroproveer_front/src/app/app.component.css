@@ -1,0 +1,20 @@
+:root {
+  --color-1: #f8e1b4;
+  --color-2: #f3d3c3;
+  --color-3: #e2b1cf;
+  --color-4: #b9e4c9;
+  --color-5: #a1d8e3;
+}
+
+/* Asegura que el contenedor principal ocupe al menos toda la altura de la ventana */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* El contenido principal crecerá para ocupar el espacio disponible */
+.main-content {
+  flex: 1;
+  width: 100%;
+}

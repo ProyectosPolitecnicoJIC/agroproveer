@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+    --color-1: #8D8D8D;
+    --color-2: #f3d3c3;
+    --color-3: #e2b1cf;
+    --color-4: #b9e4c9;
+    --color-5: #a1d8e3;
+    --color-6: #f8e1b4;
+    --color-7: #f3d3c3;
+    --color-8: #e2b1cf;
+    --color-9: #b9e4c9;
+    --color-10: #a1d8e3;
+    --color-11: #f8e1b4;
+    --color-background: #ffffff;
+
+
+    --green-1: #F7FEEF;
+    --green-2: #CBDDB5;
+    --green-3: #A8CA7E;
+    --green-4: #97B770;
+    --green-5: #608334;
+    --green-6: #334D1A;
+    
+
+    --radius-0: 5px;
+    --radius-1: 10px;
+    --radius-2: 20px;
+
+    --padding-0: 10px;
+    --padding-1: 20px;
+    --padding-2: 30px;
+    --padding-3: 40px;
+    --padding-4: 50px;
+
+    --gap-0: 10px;
+    --gap-1: 20px;
+    --gap-2: 30px;
+    --gap-3: 40px;
+    --gap-4: 50px;
+    --gap-5: 60px;
+    --gap-6: 70px;
+    --gap-7: 80px;
+    --gap-8: 90px;
+    --gap-9: 100px;
+    --gap-10: 110px;
+
+    --margin-0: 10px;
+    --margin-1: 20px;
+    --margin-2: 30px;
+    --margin-3: 40px;
+    --margin-4: 50px;
+    --margin-5: 60px;
+    --margin-6: 70px;
+    --margin-7: 80px;
+    --margin-8: 90px;
+    --margin-9: 100px;
+    --margin-10: 110px;
+    --margin-11: 120px;
+  }
+  

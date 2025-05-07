@@ -1,0 +1,36 @@
+<div class="productos-container">
+  @if(loading){
+  <div class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+  }
+
+  @if(!loading){
+  <div class="productos-grid">
+    @for(producto of productos; track producto.id){
+    <div class="producto-card">
+      <div class="producto-image">
+        <img [src]="producto.imagen" [alt]="producto.nombre">
+      </div>
+      <div class="producto-info">
+        <h3 class="producto-nombre">{{ producto.nombre }}</h3>
+        <p class="producto-descripcion">{{ producto.descripcion }}</p>
+        <div class="producto-details">
+          <span class="producto-precio">${{ producto.precio | number:'1.0-0' }}</span>
+          <span class="producto-municipio">{{ producto.municipio }}</span>
+        </div>
+        <button class="add-to-cart-button" (click)="addToCart(producto.id)">
+          Agregar al carrito
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+  }
+
+  @if(productos.length === 0){
+  <div class="no-products">
+    <p>No hay productos disponibles en este momento.</p>
+  </div>
+  }
+</div>

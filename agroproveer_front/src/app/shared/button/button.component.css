@@ -1,0 +1,113 @@
+:host {
+  display: inline-block;
+}
+
+button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 56px;
+  padding: 0 24px;
+  border: none;
+  border-radius: var(--radius-1);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+/* Size variants */
+.small { height: 40px; padding: 0 16px; font-size: 12px; }
+.medium { height: 56px; padding: 0 24px; font-size: 14px; }
+.large { height: 64px; padding: 0 32px; font-size: 16px; }
+
+/* Color variants */
+.mat-primary {
+  background: var(--green-5);
+  color: white;
+}
+
+.mat-primary:hover:not(:disabled) {
+  background: var(--green-5);
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mat-accent {
+  background: var(--color-5);
+  color: white;
+}
+
+.mat-accent:hover:not(:disabled) {
+  background: var(--color-5);
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mat-warn {
+  background: var(--color-2);
+  color: white;
+}
+
+.mat-warn:hover:not(:disabled) {
+  background: var(--color-2);
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Full width variant */
+.full-width {
+  width: 100%;
+}
+
+/* Loading state */
+.button-spinner {
+  margin-right: 8px;
+}
+
+/* Disabled state */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Icon positioning */
+.icon-left {
+  margin-right: 8px;
+}
+
+.icon-right {
+  margin-left: 8px;
+}
+
+/* Ripple effect */
+button::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .3s, opacity .5s;
+}
+
+button:active::after {
+  transform: scale(0, 0);
+  opacity: .3;
+  transition: 0s;
+}
+
