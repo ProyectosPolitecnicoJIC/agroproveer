@@ -1,25 +1,59 @@
 package com.agroproveer.usuarios.service;
 
+import com.agroproveer.usuarios.dtos.VentaRequest;
 import com.agroproveer.usuarios.models.Venta;
 import com.agroproveer.usuarios.models.VentaProducto;
+import com.agroproveer.usuarios.repository.ProductoRepository;
 import com.agroproveer.usuarios.repository.VentaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class VentaService {
 
 
-    @Autowired
-    private VentaRepository ventaRepository;
+    private final VentaRepository ventaRepository;
+    private final ProductoRepository productoRepository;
 
+    @Transactional
+    public Venta registrarVenta(VentaRequest request) {
+        Venta venta = Venta.builder()
+                .fechaVenta(LocalDateTime.now())
+                .nombreCompleto(request.getNombreCompleto())
+                .correo(request.getCorreo())
+                .direccionEnvio(request.getDireccionEnvio())
+                .metodoPago(request.getMetodoPago())
+                .telefono(request.getTelefono())
+                .documento(request.getDocumento())
+                .tipoDocumento(request.getTipoDocumento())
+                .totalPagar(request.getTotalPagar())
+                .nota(request.getNota())
+                .build();
 
-    public Venta create(Venta venta) {
+        var productosVendidos = request.getProductos().stream().map(p -> {
+            var producto = productoRepository.findById(p.getProductoId())
+                    .orElseThrow(() -> new RuntimeException("Producto no encontrado: " + p.getProductoId()));
+
+            return VentaProducto.builder()
+                    .venta(venta)
+                    .producto(producto)
+                    .cantidad(p.getCantidad())
+                    .precioUnitario(p.getPrecioUnitario())
+                    .build();
+        }).collect(Collectors.toList());
+
+        venta.setProductosVendidos(productosVendidos);
         return ventaRepository.save(venta);
     }
+
 
     public Venta update(Venta venta) {
         return ventaRepository.save(venta);
@@ -30,15 +64,15 @@ public class VentaService {
         return ventaRepository.findAll();
     }
 
-    public boolean existsById(String id) {
+    public boolean existsById(Long id) {
         return ventaRepository.existsById(id);
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         ventaRepository.deleteById(id);
     }
 
-    public Optional<Venta> findById(String id) {
+    public Optional<Venta> findById(Long id) {
         return ventaRepository.findById(id);
     }
 }
