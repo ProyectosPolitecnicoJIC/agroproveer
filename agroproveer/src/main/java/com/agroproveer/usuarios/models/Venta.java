@@ -1,8 +1,10 @@
 package com.agroproveer.usuarios.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class Venta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Column(name = "fecha_venta")
     private LocalDateTime fechaVenta = LocalDateTime.now();
@@ -40,8 +42,11 @@ public class Venta {
     @Column(name = "tipo_documento")
     private String tipoDocumento;
 
+    private BigDecimal totalPagar;
+
     private String nota;
 
     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<VentaProducto> productosVendidos;
 }

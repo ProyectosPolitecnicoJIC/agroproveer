@@ -30,7 +30,7 @@ public class VentaProductoRest {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getVentaProducto(@PathVariable String id) {
+    public ResponseEntity<?> getVentaProducto(@PathVariable Long id) {
         Optional<VentaProducto> ventaProducto = ventaProductoService.findById(id);
 
         if (ventaProducto == null || ventaProducto.isEmpty()) {
@@ -46,7 +46,7 @@ public class VentaProductoRest {
     @PostMapping(value = "/save")
     private ResponseEntity<?> save(@RequestBody VentaProducto ventaProducto) {
         try {
-            if (!ventaProductoService.existsById(ventaProducto.getId())) {
+            if (!ventaProductoService.existsById(Long.valueOf(ventaProducto.getId()))) {
                 VentaProducto temp = ventaProductoService.create(ventaProducto);
 //                webSocketService.sendPropietarioUpdate(temp);
                 return ResponseEntity.ok(temp);
@@ -63,7 +63,7 @@ public class VentaProductoRest {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Boolean> eliminarProductoById(@PathVariable String id) {
+    public ResponseEntity<Boolean> eliminarProductoById(@PathVariable Long id) {
         if (ventaProductoService.existsById(id)) {
             ventaProductoService.deleteById(id);
             return ResponseEntity.ok(ventaProductoService.findById(id)!=null);
@@ -75,7 +75,7 @@ public class VentaProductoRest {
     @PostMapping(value = "/actualizar")
     private ResponseEntity<?> actualizarProducto(@RequestBody VentaProducto ventaProducto) {
         try {
-            if (ventaProductoService.existsById(ventaProducto.getId())) {
+            if (ventaProductoService.existsById(Long.valueOf(ventaProducto.getId()))) {
                 VentaProducto temp = ventaProductoService.update(ventaProducto);
 //                webSocketService.sendPropietarioUpdate(temp);
                 return ResponseEntity.ok(temp);

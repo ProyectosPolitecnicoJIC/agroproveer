@@ -1,6 +1,5 @@
 package com.agroproveer.usuarios.service;
 
-import com.agroproveer.usuarios.models.Usuario;
 import com.agroproveer.usuarios.models.VentaProducto;
 import com.agroproveer.usuarios.repository.VentaProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +29,15 @@ public class VentaProductoService {
         return ventaProductoRepository.findAll();
     }
 
-    public boolean existsById(String id) {
+    public boolean existsById(Long id) {
         return ventaProductoRepository.existsById(id);
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         ventaProductoRepository.deleteById(id);
     }
 
-    public Optional<VentaProducto> findById(String id) {
+    public Optional<VentaProducto> findById(Long id) {
         return ventaProductoRepository.findById(id);
     }
 }

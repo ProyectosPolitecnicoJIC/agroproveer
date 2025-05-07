@@ -21,28 +21,28 @@ public class JwtUtil {
     @Value("${jwt.expiration}")
     private long jwtExpirationMs;
 
-    // 🔥 Generar token para un usuario
+
     public String generateToken(UserDetails userDetails) {
         return Jwts.builder()
-                .setSubject(userDetails.getUsername())  // el usuario es el "subject"
-                .setIssuedAt(new Date())                // fecha de creación
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs)) // vencimiento
-                .signWith(getSignKey(), SignatureAlgorithm.HS256) // firmar con clave secreta
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
+                .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    // 🔎 Obtener usuario desde el token
+
     public String extractUsername(String token) {
         return extractAllClaims(token).getSubject();
     }
 
-    // ✅ Verificar si el token es válido
+
     public boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    // 🔒 Extraer claims
+
     private Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignKey())
@@ -51,12 +51,12 @@ public class JwtUtil {
                 .getBody();
     }
 
-    // ⏰ Comprobar expiración
+
     private boolean isTokenExpired(String token) {
         return extractAllClaims(token).getExpiration().before(new Date());
     }
 
-    // 🔑 Clave secreta para firmar
+
     private Key getSignKey() {
         byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
