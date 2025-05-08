@@ -29,6 +29,7 @@ CREATE TABLE producto (
     precio DECIMAL(10, 2) NOT NULL,
     imagen_url TEXT,
     municipio VARCHAR(100) NOT NULL,
+    cantidad_disponible INTEGER NOT NULL DEFAULT 0,
     vendedor_id VARCHAR NOT NULL REFERENCES usuario(documento) ON DELETE CASCADE,
     categoria_id INTEGER NOT NULL REFERENCES categoria(id) ON DELETE CASCADE
 );
@@ -58,45 +59,48 @@ CREATE TABLE venta_producto (
 );
 
 
-INSERT INTO usuario (nombre, apellido, correo, contrasena, telefono, documento, tipo_documento, direccion, departamento, municipio, rol) VALUES 
-('Carlos', 'Pérez', 'carlos.perez@agro.com', '123456', '3001234567', '100200300', 'CC', 'Calle 10 #20-30', 'Antioquia', 'Medellín', 'VENDEDOR'),
-('Laura', 'Gómez', 'laura.gomez@agro.com', 'abcdef', '3012345678', '200300400', 'CC', 'Carrera 50 #15-20', 'Antioquia', 'Envigado', 'VENDEDOR'),
-('Marta', 'López', 'marta.lopez@agro.com', 'pass1234', '3023456789', '300400500', 'CC', 'Calle 30 #10-15', 'Antioquia', 'Bello', 'VENDEDOR'),
-('Juan', 'Torres', 'juan.torres@agro.com', 'adminpass', '3111112222', '400500600', 'CC', 'Avenida 70 #40-60', 'Antioquia', 'Itagüí', 'ADMIN');
+INSERT INTO usuario (nombre, apellido, correo, contrasena, telefono, documento, tipo_documento, direccion, departamento, municipio, rol)
+VALUES 
+('Juan', 'Pérez', 'juan.perez@example.com', 'hashedpassword1', '3001234567', '1001', 'CC', 'Calle 1 #10-20', 'Cundinamarca', 'Bogotá', 'VENDEDOR'),
+('María', 'López', 'maria.lopez@example.com', 'hashedpassword2', '3002345678', '1002', 'CC', 'Calle 2 #20-30', 'Antioquia', 'Medellín', 'VENDEDOR'),
+('Carlos', 'Ramírez', 'carlos.ramirez@example.com', 'hashedpassword3', '3003456789', '1003', 'CC', 'Calle 3 #30-40', 'Valle', 'Cali', 'VENDEDOR'),
+('Ana', 'Gómez', 'ana.gomez@example.com', 'hashedpassword4', '3004567890', '2001', 'CC', 'Carrera 45 #15-23', 'Cundinamarca', 'Bogotá', 'COMPRADOR'),
+('Luis', 'Martínez', 'luis.martinez@example.com', 'hashedpassword5', '3005678901', '2002', 'CC', 'Carrera 12 #45-67', 'Antioquia', 'Medellín', 'COMPRADOR');
+
+INSERT INTO categoria (nombre, descripcion)
+VALUES 
+('Frutas', 'Frutas frescas y locales'),
+('Verduras', 'Verduras orgánicas'),
+('Lácteos', 'Productos lácteos artesanales'),
+('Granos', 'Granos y cereales'),
+('Carnes', 'Carne fresca de campo');
 
 
-INSERT INTO categoria (nombre, descripcion) VALUES
-('Tubérculos', 'Productos como papa, yuca y similares'),
-('Verduras', 'Verduras frescas como zanahoria, lechuga, etc.'),
-('Cereales', 'Arroz, maíz, trigo y otros cereales'),
-('Frutas', 'Frutas frescas de la región');
-
-INSERT INTO producto (nombre, descripcion, precio, imagen_url, municipio, vendedor_id, categoria_id) VALUES
-('Papa Criolla', 'Papa criolla fresca cultivada en Antioquia.', 2500.00, 'https://ejemplo.com/papa.jpg', 'Medellín', 400500600, 1),
-('Zanahoria', 'Zanahoria orgánica de alta calidad.', 1800.00, 'https://ejemplo.com/zanahoria.jpg', 'Envigado', 300400500, 2),
-('Arroz Integral', 'Arroz integral 100% natural.', 4000.00, 'https://ejemplo.com/arroz.jpg', 'Bello', 100200300, 3),
-('Mango Tommy', 'Mangos Tommy jugosos y dulces.', 3500.00, 'https://ejemplo.com/mango.jpg', 'Itagüí', 100200300, 4);
+INSERT INTO producto (nombre, descripcion, precio, imagen_url, municipio, cantidad_disponible, vendedor_id, categoria_id)
+VALUES 
+('Manzanas', 'Manzanas rojas dulces', 3000.00, 'https://example.com/manzanas.jpg', 'Bogotá', 50, '1001', 1),
+('Lechuga', 'Lechuga fresca y orgánica', 1500.00, 'https://example.com/lechuga.jpg', 'Medellín', 100, '1002', 2),
+('Queso campesino', 'Queso fresco artesanal', 12000.00, 'https://example.com/queso.jpg', 'Cali', 20, '1003', 3),
+('Arroz', 'Arroz blanco premium', 2500.00, 'https://example.com/arroz.jpg', 'Bogotá', 200, '1001', 4),
+('Pollo campesino', 'Pollo fresco de granja', 15000.00, 'https://example.com/pollo.jpg', 'Medellín', 30, '1002', 5);
 
 
-INSERT INTO venta (
-    nombre_completo, correo, direccion_envio, metodo_pago, telefono, documento, tipo_documento, total_pagar, nota
-) VALUES
-(
-    'Juan Carlos Martínez',
-    'juan.martinez@correo.com',
-    'Calle 50 #20-30, Medellín',
-    'Efectivo',
-    '3005556666',
-    '1122334455',
-    'CC',
-    9800.00,
-    'Por favor entregar en la mañana.'
-);
+INSERT INTO venta (nombre_completo, correo, direccion_envio, metodo_pago, telefono, documento, tipo_documento, total_pagar, nota)
+VALUES 
+('Ana Gómez', 'ana.gomez@example.com', 'Carrera 45 #15-23', 'Tarjeta de crédito', '3004567890', '2001', 'CC', 4500.00, 'Por favor, entregar entre 3-5pm'),
+('Luis Martínez', 'luis.martinez@example.com', 'Carrera 12 #45-67', 'Efectivo', '3005678901', '2002', 'CC', 3000.00, 'Entregar en portería');
 
-INSERT INTO venta_producto (venta_id, producto_id, cantidad, precio_unitario) VALUES
-(1, 1, 2, 2500.00),  -- 2 papas criollas
-(1, 2, 1, 1800.00),  -- 1 zanahoria
-(1, 3, 1, 4000.00);  -- 1 arroz integral
+
+-- Venta 1: Ana compra 1 lechuga y 1 arroz
+INSERT INTO venta_producto (venta_id, producto_id, cantidad, precio_unitario)
+VALUES 
+(1, 2, 1, 1500.00),  -- Lechuga
+(1, 4, 1, 2500.00);  -- Arroz
+
+-- Venta 2: Luis compra 1 kg de manzanas
+INSERT INTO venta_producto (venta_id, producto_id, cantidad, precio_unitario)
+VALUES 
+(2, 1, 1, 3000.00);  -- Manzanas
 
 
 

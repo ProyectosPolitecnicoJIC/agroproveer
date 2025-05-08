@@ -66,22 +66,6 @@ public class VentaRest {
     public Venta crearVenta(@RequestBody VentaRequest request) {
         return ventaService.registrarVenta(request);
     }
-//            try {
-//                if (!ventaService.existsById(venta.getId())) {
-//                    Venta temp = ventaService.create(venta);
-////                webSocketService.sendPropietarioUpdate(temp);
-//                    return ResponseEntity.ok(temp);
-//                } else {
-//                    Map<String, String> errorResponse = new HashMap<>();
-//                    errorResponse.put("error", " " + venta.getId() + " ya está registrado.");
-//                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
-//                }
-//            } catch (Exception e) {
-//                Map<String, String> errorResponse = new HashMap<>();
-//                errorResponse.put("error", "Ocurrió un error al registrar el producto.");
-//                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-//            }
-
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Boolean> eliminarVentaById(@PathVariable Long id) {
@@ -98,7 +82,6 @@ public class VentaRest {
         try {
             if (ventaService.existsById(Long.valueOf(venta.getId()))) {
                 Venta temp = ventaService.update(venta);
-//                webSocketService.sendPropietarioUpdate(temp);
                 return ResponseEntity.ok(temp);
             } else {
                 Map<String, String> errorResponse = new HashMap<>();

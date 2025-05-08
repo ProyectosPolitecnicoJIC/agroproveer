@@ -33,7 +33,7 @@ public class UsuarioRest {
         if (usuario == null || usuario.isEmpty()) {
 
             Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", "No se encuentra registrado el usuario : " + id);
+            errorResponse.put("error", "No se encuentra registrado el usuario con documento : " + id);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
 

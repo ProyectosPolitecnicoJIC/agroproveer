@@ -37,4 +37,7 @@ public class Producto {
 
     @Column(name = "categoria_id", nullable = false)
     private Long categoria;
+
+    @Column(name = "cantidad_disponible",nullable = false)
+    private Integer cantidadDisponible;
 }
