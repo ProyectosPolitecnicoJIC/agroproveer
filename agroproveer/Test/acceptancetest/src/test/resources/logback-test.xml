@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Definición del appender para consola -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %level - %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Definición de un appender para archivo de log, si lo deseas -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>target/test-logs/test-application.log</file> <!-- Ubicación del log para pruebas -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %level - %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Configuración de los loggers -->
+    <logger name="com.intuit.karate" level="DEBUG"/>
+    <!-- Configuración del logger raíz -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>
