@@ -1,0 +1,16 @@
+version: '3.8'	
+
+services:
+  agroproveer-database:
+    image: mysql:5.7
+    container_name: agroproveer-database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: agroproveer
+      MYSQL_USER: agroproveer
+      MYSQL_PASSWORD: agroproveer
+    ports:
+      - "8001:3306"
+  
+
