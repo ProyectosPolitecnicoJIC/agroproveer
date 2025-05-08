@@ -1,0 +1,610 @@
+{
+	"info": {
+		"_postman_id": "7cb93b22-cf5c-4420-b27f-3a190578327b",
+		"name": "agroproveer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "categorias",
+			"item": [
+				{
+					"name": "listar categorias",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8096/api/categoria",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"categoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar categorias por nombre",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8096/api/categoria/nombre/Frutas Tropicales",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"categoria",
+								"nombre",
+								"Frutas Tropicales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categorias eliminar",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8096/api/categoria/eliminar/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"categoria",
+								"eliminar",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear categoria",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Frutas Tropicales\",\r\n  \"descripcion\": \"Una categoría para todos los productos de frutas tropicales como mango, piña y papaya.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8096/api/categoria/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"categoria",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editar categoria",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 6,\r\n  \"nombre\": \"Frutas Tropicales\",\r\n  \"descripcion\": \"Una categoría para todos los productos de frutas tropicales como mango, piña.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8096/api/categoria/actualizar",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"categoria",
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar categorias por id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8096/api/categoria/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"categoria",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usuarios",
+			"item": [
+				{
+					"name": "listar usuarios",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8096/api/usuarios",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar usuarios por documento",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8096/api/usuarios/123456787",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"usuarios",
+								"123456787"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuarios eliminar",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8096/api/usuarios/eliminar/123456787",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"usuarios",
+								"eliminar",
+								"123456787"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Ana María\",\r\n    \"apellido\": \"Gómez\",\r\n    \"correo\": \"ana.gomez@example.com\",\r\n    \"contrasena\": \"ClaveSegura4567\",\r\n    \"telefono\": \"3109876543\",\r\n    \"documento\": \"123456787\",\r\n    \"tipoDocumento\": \"CC\",\r\n    \"direccion\": \"Calle 50 #15-20, Medellín\",\r\n    \"departamento\": \"Antioquia\",\r\n    \"municipio\": \"Medellín\",\r\n    \"rol\": \"VENDEDOR\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8096/api/usuarios/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"usuarios",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Ana María\",\r\n    \"apellido\": \"Gómez\",\r\n    \"correo\": \"ana.gomez@example.com\",\r\n    \"contrasena\": \"ClaveSegura4567\",\r\n    \"telefono\": \"123456789\",\r\n    \"documento\": \"123456787\",\r\n    \"tipoDocumento\": \"CC\",\r\n    \"direccion\": \"Calle 50 #15-20, Medellín\",\r\n    \"departamento\": \"Antioquia\",\r\n    \"municipio\": \"Medellín\",\r\n    \"rol\": \"VENDEDOR\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8096/api/usuarios/actualizar",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"usuarios",
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "productos",
+			"item": [
+				{
+					"name": "produto list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8096/api/producto",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"producto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "produto por id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8096/api/producto/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"producto",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registrar productos",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Papa Pastusa\",\r\n    \"descripcion\": \"Papa de excelente calidad, cultivada en tierras altas.\",\r\n    \"precio\": 2200.50,\r\n    \"imagenUrl\": \"https://miapp.com/images/papa_pastusa.jpg\",\r\n    \"municipio\": \"Rionegro\",\r\n    \"vendedor\": \"400500600\",\r\n    \"categoria\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8096/api/producto/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"producto",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ventas",
+			"item": [
+				{
+					"name": "listar ventas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8096/api/venta",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"venta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listar venta id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8096/api/venta/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"venta",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Venta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombreCompleto\": \"Juan Pérez\",\r\n  \"correo\": \"juan.perez@example.com\",\r\n  \"direccionEnvio\": \"Carrera 12 #45-67, Bogotá\",\r\n  \"metodoPago\": \"Tarjeta de crédito\",\r\n  \"telefono\": \"3123456789\",\r\n  \"documento\": \"123456789\",\r\n  \"tipoDocumento\": \"CC\",\r\n  \"totalPagar\": 9000.00,\r\n  \"nota\": \"Por favor entregar en horario de la mañana\",\r\n  \"productos\": [\r\n    {\r\n      \"productoId\": 5,\r\n      \"cantidad\": 20,\r\n      \"precioUnitario\": 2500.00\r\n    },\r\n    {\r\n      \"productoId\": 7,\r\n      \"cantidad\": 100,\r\n      \"precioUnitario\": 4000.00\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8096/api/venta/sendVenta",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"api",
+								"venta",
+								"sendVenta"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "auth",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"ana.gomez@example.com\",\r\n  \"password\": \"ClaveSegura4567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8096/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8096",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}

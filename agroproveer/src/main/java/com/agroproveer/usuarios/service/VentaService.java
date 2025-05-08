@@ -42,6 +42,14 @@ public class VentaService {
             var producto = productoRepository.findById(p.getProductoId())
                     .orElseThrow(() -> new RuntimeException("Producto no encontrado: " + p.getProductoId()));
 
+            if (producto.getCantidadDisponible() < p.getCantidad()) {
+                throw new RuntimeException("Stock insuficiente para el producto: " + producto.getNombre());
+            }
+
+            producto.setCantidadDisponible(producto.getCantidadDisponible() - p.getCantidad());
+
+            productoRepository.save(producto);
+
             return VentaProducto.builder()
                     .venta(venta)
                     .producto(producto)
