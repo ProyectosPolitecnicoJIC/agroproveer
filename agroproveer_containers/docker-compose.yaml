@@ -1,16 +1,15 @@
-version: '3.8'	
+version: '3.8'
 
 services:
-  agroproveer-database:
-    image: mysql:5.7
+  agroproveer_database:
+    image: postgres:latest
     container_name: agroproveer-database
-    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: agroproveer
-      MYSQL_USER: agroproveer
-      MYSQL_PASSWORD: agroproveer
+      POSTGRES_DB: agroproveer
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      PGDATA: /var/lib/postgresql/data
     ports:
-      - "8001:3306"
+      - "5431:5432"
   
-
+    
