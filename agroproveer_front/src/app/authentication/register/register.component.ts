@@ -7,6 +7,7 @@ import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angula
 import { DocumentTypesService } from '../../core/services/document-types.service';
 import { DepartamentosService } from '../../core/services/departamentos.service';
 import { CiudadesService } from '../../core/services/ciudades.service';
+import { RegisterService } from '../services/register.service';
 
 @Component({
   selector: 'app-register',
@@ -51,7 +52,8 @@ export class RegisterComponent implements OnInit {
     private documentTypesService: DocumentTypesService,
     private departamentosService: DepartamentosService,
     private ciudadesService: CiudadesService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private registerService: RegisterService
   ) {
     // Inicializar el estado del formulario
     this.form.statusChanges.subscribe(() => {
@@ -111,7 +113,37 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
+
+      const usuario = {
+        nombre: this.NombreControl.value,
+        apellido: this.ApellidoControl.value,
+        correo: this.CorreoControl.value,
+        contrasena: this.ContrasenaControl.value,
+        telefono: this.TelefonoControl.value,
+        documento: this.DocumentoControl.value,
+        tipoDocumento: this.TipoDocumentoControl.value,
+        direccion: this.DireccionControl.value,
+        departamento: this.DepartamentoControl.value,
+        municipio: this.MunicipioControl.value,
+        rol: 'VENDEDOR'
+      };
+
+      console.log('Usuario:', usuario);
+
+      this.registerService.register(usuario).subscribe({
+        next: (response) => {
+          console.log('Registro:', response, usuario);
+          if (response) {
+            console.log('Registro exitoso');
+          } else {
+            console.error('Error en el registro');
+          }
+        },
+        error: (error) => {
+          console.error('Error en el registro', error);
+        }
+      });
+
     } else {
       console.log('Formulario inválido');
     }

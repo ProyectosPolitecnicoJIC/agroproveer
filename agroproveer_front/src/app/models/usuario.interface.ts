@@ -1,12 +1,13 @@
 export interface Usuario {
-    correo: string;
-    contrasena: string;
     nombre: string;
     apellido: string;
-    tipodocumento: string;
-    documento: string;
+    correo: string;
+    contrasena: string;
     telefono: string;
+    documento: string;
+    tipoDocumento: string;
+    direccion: string;
     departamento: string;
     municipio: string;
-    direccion: string;
+    rol: string;
 }
