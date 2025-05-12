@@ -7,7 +7,7 @@ export interface Usuario {
     documento: string;
     tipoDocumento: string;
     direccion: string;
-    departamento: string;
-    municipio: string;
+    departamento: string | undefined;
+    municipio: string | undefined;
     rol: string;
 }

@@ -35,10 +35,10 @@ public class SecurityConfig {
                     config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
                     return config;
                 }))
-                .anonymous(anonymous -> anonymous.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/api/categoria", "/api/producto").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/usuarios/save").permitAll()
+
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/auth/login").permitAll()
                         .anyRequest().authenticated())
