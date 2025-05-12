@@ -7,7 +7,8 @@ import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angula
 import { DocumentTypesService } from '../../core/services/document-types.service';
 import { DepartamentosService } from '../../core/services/departamentos.service';
 import { CiudadesService } from '../../core/services/ciudades.service';
-
+import { RegisterService } from '../services/register.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -15,7 +16,7 @@ import { CiudadesService } from '../../core/services/ciudades.service';
     FormInputComponent,
     ReactiveFormsModule,
     FormSelectComponent,
-    ButtonComponent
+    ButtonComponent,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -51,7 +52,9 @@ export class RegisterComponent implements OnInit {
     private documentTypesService: DocumentTypesService,
     private departamentosService: DepartamentosService,
     private ciudadesService: CiudadesService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private registerService: RegisterService,
+    private router: Router
   ) {
     // Inicializar el estado del formulario
     this.form.statusChanges.subscribe(() => {
@@ -111,7 +114,39 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
+
+      let ciudadlabel = this.ciudadesList.find(i => i.value === this.MunicipioControl.value)?.label;
+      let departamentolabel = this.departamentosList.find(i => i.value === this.DepartamentoControl.value)?.label;
+      const usuario = {
+        nombre: this.NombreControl.value,
+        apellido: this.ApellidoControl.value,
+        correo: this.CorreoControl.value,
+        contrasena: this.ContrasenaControl.value,
+        telefono: this.TelefonoControl.value,
+        documento: this.DocumentoControl.value,
+        tipoDocumento: this.TipoDocumentoControl.value,
+        direccion: this.DireccionControl.value,
+        departamento: departamentolabel,
+        municipio: ciudadlabel,
+        rol: 'VENDEDOR'
+      };
+
+
+      this.registerService.register(usuario).subscribe({
+        next: (response) => {
+          if (response) {
+            alert('Registro exitoso');
+            this.form.reset();
+            this.router.navigate(['/login']);
+          } else {
+            alert('Error en el registro');
+          }
+        },
+        error: (error) => {
+          console.error('Error en el registro', error);
+        }
+      });
+
     } else {
       console.log('Formulario inválido');
     }
