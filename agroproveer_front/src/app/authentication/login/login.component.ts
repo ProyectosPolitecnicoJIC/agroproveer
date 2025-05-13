@@ -5,6 +5,8 @@ import { FormInputComponent } from '../../shared/form-input/form-input.component
 import { ButtonType } from '../../shared/button/button.types';
 import { LoginService } from '../services/login.service';
 import { Login } from '../../models/login.interface';
+import { jwtData } from '../../models/jwt.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -28,11 +30,17 @@ export class LoginComponent implements OnInit {
   emailControl = this.formLogin.get('email') as FormControl<string>;
   passwordControl = this.formLogin.get('password') as FormControl<string>;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
 
   ngOnInit() {
     this.formLogin.updateValueAndValidity();
+    if(localStorage.getItem('token')){
+      const userDataString = localStorage.getItem('userData');
+      if (userDataString && (JSON.parse(userDataString).exp > Date.now() / 1000)) {
+        this.router.navigate(['/home']);
+      }
+    }
   }
 
   onSubmit() {
@@ -48,7 +56,17 @@ export class LoginComponent implements OnInit {
             // Store token in local storage or handle successful login
             localStorage.setItem('token', response.token); // Assuming the API returns a token
             const jwtData = JSON.parse(atob(response.token.split('.')[1]));
-            console.log('JWT Data:', jwtData);
+            let userData: jwtData = {
+              sub: jwtData.sub,
+              iat: jwtData.iat,
+              exp: jwtData.exp,
+              rol: jwtData.rol,
+              cedula: jwtData.cedula
+            };
+            localStorage.setItem('userData', JSON.stringify(userData));
+            this.router.navigate(['/home']);
+          } else{
+            alert('Credenciales incorrectas');
           }
         }
       );

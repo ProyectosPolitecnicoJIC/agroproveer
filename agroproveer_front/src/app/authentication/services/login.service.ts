@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, map, catchError, of } from "rxjs";
+import { Observable, map } from "rxjs";
 import { Login } from "../../models/login.interface";
 import { LoginResponse } from "../../models/loginresponse.interface";
 
@@ -24,5 +24,11 @@ export class LoginService {
                 return loginResponse;
             })
         );
+    }
+
+    logout(): void {
+        console.log("cerrando sesión");
+        localStorage.removeItem('token');
+        localStorage.removeItem('userData');
     }
 }
