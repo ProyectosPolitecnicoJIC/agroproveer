@@ -3,6 +3,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ButtonComponent } from '../../shared/button/button.component';
 import { FormInputComponent } from '../../shared/form-input/form-input.component';
 import { ButtonType } from '../../shared/button/button.types';
+import { LoginService } from '../services/login.service';
+import { Login } from '../../models/login.interface';
 
 @Component({
   selector: 'app-login',
@@ -26,13 +28,31 @@ export class LoginComponent implements OnInit {
   emailControl = this.formLogin.get('email') as FormControl<string>;
   passwordControl = this.formLogin.get('password') as FormControl<string>;
 
+  constructor(private loginService: LoginService) { }
+
+
   ngOnInit() {
     this.formLogin.updateValueAndValidity();
   }
 
   onSubmit() {
     if (this.formLogin.valid) {
-      console.log(this.formLogin.value);
+      const loginData: Login = {
+        username: this.emailControl.value,
+        password: this.passwordControl.value
+      };
+
+      this.loginService.login(loginData).subscribe(
+        (response) => {
+          if (response) {
+            console.log('Login successful');
+            // Store token in local storage or handle successful login
+            localStorage.setItem('token', response.token); // Assuming the API returns a token
+          } else {
+            console.log('Login failed');
+          }
+        }
+      );
     }
   }
 }
