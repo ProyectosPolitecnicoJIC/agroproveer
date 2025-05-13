@@ -6,6 +6,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 
 @Service
@@ -17,8 +20,13 @@ public class JwtService {
     @Value("${jwt.expiration}")
     private long expirationTime;
 
-    public String generateToken(String username) {
+    public String generateToken(String username, String cedula, String rol) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("cedula", cedula);
+        claims.put("rol", rol);
+
         return Jwts.builder()
+                .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
@@ -40,6 +48,14 @@ public class JwtService {
 
     public String extractUsername(String token) {
         return extractClaims(token).getSubject();
+    }
+
+    public String extractCedula(String token) {
+        return extractClaims(token).get("cedula", String.class);
+    }
+
+    public String extractRol(String token) {
+        return extractClaims(token).get("rol", String.class);
     }
 
     public boolean validateToken(String token, String username) {
