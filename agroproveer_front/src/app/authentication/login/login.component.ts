@@ -45,11 +45,10 @@ export class LoginComponent implements OnInit {
       this.loginService.login(loginData).subscribe(
         (response) => {
           if (response) {
-            console.log('Login successful');
             // Store token in local storage or handle successful login
             localStorage.setItem('token', response.token); // Assuming the API returns a token
-          } else {
-            console.log('Login failed');
+            const jwtData = JSON.parse(atob(response.token.split('.')[1]));
+            console.log('JWT Data:', jwtData);
           }
         }
       );
