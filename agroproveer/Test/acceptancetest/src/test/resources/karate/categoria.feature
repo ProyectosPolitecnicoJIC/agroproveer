@@ -2,7 +2,7 @@ Feature: crud de categoria
 
   Background:
     * url 'http://localhost:8096/api'
-    * def token  = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmEuZ29tZXpAZXhhbXBsZS5jb20iLCJpYXQiOjE3NDY2NzU2ODksImV4cCI6MTc0Njc2MTY4OX0.yxBCTP5QBTSAeY4zEMCJMlLRyKLtxJegufLfhlOR4XQ'
+    * def token  = karate.get('token')
     * header Authorization = token
 
   @tag1
@@ -77,6 +77,31 @@ Feature: crud de categoria
     And match response.nombre == uniqueNombre
     * print 'El nombre es:', createdId
     * def inputs = { token: #(token), id: #(createdId) }
-    * def eliminar = call read('classpath:karate/categoria_snippet.feature') inputs
+    * def eliminar = call read('classpath:karate/pruebas_snippet.feature@DeleteCategoria') inputs
+
+
+  @editar
+  Scenario: Editar una categoría existente
+    * call read('classpath:karate/pruebas_snippet.feature@CreateCategoria') { token: #(token) }
+    * def id = result.id
+    * print 'ID creado:', id
+
+    * def categoriaEditada =
+  """
+  {
+    "id": #(id),
+    "nombre": "Categoria-Editada",
+    "descripcion": "Descripción actualizada"
+  }
+  """
+    Given path '/categoria/actualizar'
+    And header Content-Type = 'application/json'
+    And request categoriaEditada
+    When method POST
+    Then status 200
+    And match response.nombre == 'Categoria-Editada'
+    And match response.descripcion == 'Descripción actualizada'
+
+    * call read('classpath:karate/pruebas_snippet.feature@DeleteCategoria') { id: #(id), token: #(token) }
 
 
