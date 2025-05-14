@@ -85,7 +85,7 @@ public class CategoriaRest {
     @PostMapping(value = "/actualizar")
     private ResponseEntity<?> actualizarProducto(@RequestBody Categoria categoria) {
         try {
-            if (categoriaService.existsByNombre(categoria.getNombre())) {
+            if (categoriaService.existsById(categoria.getId())) {
                 Categoria temp = categoriaService.update(categoria);
                 return ResponseEntity.ok(temp);
             } else {
