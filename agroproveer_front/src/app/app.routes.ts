@@ -8,6 +8,7 @@ import { CheckoutComponent } from './basic/checkout/checkout.component';
 import { ProductosComponent } from './basic/productos/productos.component';
 import { AdminproductosComponent } from './basic/adminproductos/adminproductos.component';
 import { CategoriasComponent } from './basic/categorias/categorias.component';
+import { LogoutComponent } from './authentication/logout/logout.component';
 export const routes: Routes = [
     { path: 'registro', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
@@ -18,5 +19,7 @@ export const routes: Routes = [
     { path: 'checkout', component: CheckoutComponent },
     { path: 'mercado', component: ProductosComponent },
     { path: 'adminproductos', component: AdminproductosComponent },
-    { path: 'admincategorias', component: CategoriasComponent }
+    { path: 'admincategorias', component: CategoriasComponent },
+    { path: 'logout', component: LogoutComponent }, // Redirect to login on logout
+    {   path: '**', redirectTo: '/home' } // Redirect to home for any unknown routes
 ];
