@@ -62,6 +62,21 @@ public class VentaRest {
         return ResponseEntity.ok(venta);
     }
 
+
+    @GetMapping("/documento/{documento}")
+    public ResponseEntity<?> getVentaByDocumento(@PathVariable String documento) {
+        List<Venta> venta = ventaService.findByDocumento(documento);
+
+        if (venta == null || venta.isEmpty()) {
+
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "No se registro : " + documento);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        }
+
+        return ResponseEntity.ok(venta);
+    }
+
     @PostMapping(value = "/sendVenta")
     public Venta crearVenta(@RequestBody VentaRequest request) {
         return ventaService.registrarVenta(request);

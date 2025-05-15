@@ -1,12 +1,13 @@
 package com.agroproveer.usuarios.service;
 
 import com.agroproveer.usuarios.dtos.VentaRequest;
+import com.agroproveer.usuarios.exception.GlobalExceptionHandler;
+import com.agroproveer.usuarios.exception.StockInsuficienteException;
 import com.agroproveer.usuarios.models.Venta;
 import com.agroproveer.usuarios.models.VentaProducto;
 import com.agroproveer.usuarios.repository.ProductoRepository;
 import com.agroproveer.usuarios.repository.VentaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +44,7 @@ public class VentaService {
                     .orElseThrow(() -> new RuntimeException("Producto no encontrado: " + p.getProductoId()));
 
             if (producto.getCantidadDisponible() < p.getCantidad()) {
-                throw new RuntimeException("Stock insuficiente para el producto: " + producto.getNombre());
+                throw new StockInsuficienteException("Stock insuficiente para el producto: " + producto.getNombre());
             }
 
             producto.setCantidadDisponible(producto.getCantidadDisponible() - p.getCantidad());
@@ -82,5 +83,9 @@ public class VentaService {
 
     public Optional<Venta> findById(Long id) {
         return ventaRepository.findById(id);
+    }
+
+    public List<Venta> findByDocumento(String documento) {
+        return ventaRepository.findByDocumento(documento);
     }
 }
