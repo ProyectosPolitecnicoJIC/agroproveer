@@ -41,11 +41,14 @@ export class ProductosComponent implements OnInit {
         id: producto.id,
         nombre: producto.nombre,
         precio: producto.precio,
-        cantidad: 1,
         imagen: producto.imagen,
         descripcion: producto.descripcion,
-        vendedor_id: producto.vendedor_id,
-        categoria_id: producto.categoria_id
+        cantidad: 1,
+        vendedor: producto.vendedor,
+        categoria: producto.categoria,
+        cantidadDisponible: producto.cantidadDisponible,
+        municipio: producto.municipio
+
       }
       this.cartService.addItem(item);
     }

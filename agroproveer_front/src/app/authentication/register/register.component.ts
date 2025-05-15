@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormInputComponent } from '../../shared/form-input/form-input.component';
 import { FormSelectComponent } from '../../shared/form-select/form-select.component';
 import { ButtonComponent } from '../../shared/button/button.component';
-import { ButtonType, ButtonVariant, ButtonSize} from '../../shared/button/button.types';
-import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ButtonType, ButtonVariant, ButtonSize } from '../../shared/button/button.types';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { DocumentTypesService } from '../../core/services/document-types.service';
 import { DepartamentosService } from '../../core/services/departamentos.service';
 import { CiudadesService } from '../../core/services/ciudades.service';
@@ -22,6 +22,16 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
+
+
+
+  // Validaciones personalizadas
+  passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    const password = group.get('Contrasena')?.value;
+    const confirmPassword = group.get('ConfirmarContrasena')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  };
+
   form = new FormGroup({
     Correo: new FormControl<string>('', [Validators.required, Validators.email]),
     Contrasena: new FormControl<string>('', [Validators.required, Validators.minLength(6)]),
@@ -34,7 +44,15 @@ export class RegisterComponent implements OnInit {
     Departamento: new FormControl<string>(''),
     Municipio: new FormControl<string>(''),
     Direccion: new FormControl<string>('', [Validators.required])
+  }, {
+    validators: this.passwordMatchValidator
   });
+
+  get passwordMismatchError(): boolean {
+    return this.form.hasError('passwordMismatch');
+  }
+
+
 
   CorreoControl = this.form.get('Correo') as FormControl<string>;
   ContrasenaControl = this.form.get('Contrasena') as FormControl<string>;
@@ -59,6 +77,9 @@ export class RegisterComponent implements OnInit {
     // Inicializar el estado del formulario
     this.form.statusChanges.subscribe(() => {
       this.cdr.detectChanges();
+    });
+    this.form.get('ConfirmarContrasena')?.valueChanges.subscribe(() => {
+      this.form.updateValueAndValidity();
     });
   }
 

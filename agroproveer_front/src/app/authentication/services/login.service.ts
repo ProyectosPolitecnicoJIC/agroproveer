@@ -45,7 +45,7 @@ export class LoginService {
         return localStorage.getItem('token') || ""  ;
     }
 
-    private getUserData(): any {
+    getUserData(): any {
         return JSON.parse(localStorage.getItem('userData') || '{}');
     }
 

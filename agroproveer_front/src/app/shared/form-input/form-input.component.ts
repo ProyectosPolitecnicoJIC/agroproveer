@@ -26,6 +26,8 @@ export class FormInputComponent {
   @Input() hint: string = "";
   @Input() mandatory: boolean = false;
   @Input() enabled: boolean = true;
+  @Input() errorMessage?: string = "";
+  @Input() showCustomError: boolean = false;
  
   passwordVisible: boolean = false;
 

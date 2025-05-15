@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Checkout } from '../../models/checkout.interface';
@@ -7,19 +7,21 @@ import { DocumentTypesService } from '../../core/services/document-types.service
 import { PaymentMethodsService } from '../../core/services/payment-methods.service';
 import { FormInputComponent } from '../../shared/form-input/form-input.component';
 import { FormSelectComponent } from '../../shared/form-select/form-select.component';
-import { MatIcon } from '@angular/material/icon';
 import { ProductoCart } from '../../models/productocart.interface';
-
+import { FormCheckboxComponent } from '../../shared/form-checkbox/form-checkbox.component';
+import { DepartamentosService } from '../../core/services/departamentos.service';
+import { CiudadesService } from '../../core/services/ciudades.service';
 @Component({
   selector: 'app-checkout',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
+    CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     FormInputComponent,
     FormSelectComponent,
     DecimalPipe,
+    FormCheckboxComponent
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
@@ -28,12 +30,18 @@ export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
   cartItems: ProductoCart[] = [];
   totalPrice: number = 0;
+  shippingCost: number = 0;
+  departamentos: any[] = [];
+  ciudades: any[] = [];
 
   constructor(
     private fb: FormBuilder,
     private cartService: CartService,
     private documentTypesService: DocumentTypesService,
-    private paymentMethodsService: PaymentMethodsService
+    private paymentMethodsService: PaymentMethodsService,
+    private departamentosService: DepartamentosService,
+    private ciudadesService: CiudadesService,
+    private cdr: ChangeDetectorRef
   ) {
     this.checkoutForm = this.fb.group({
       nombre_comprador: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -41,21 +49,74 @@ export class CheckoutComponent implements OnInit {
       direccion_envio: new FormControl('', [Validators.required, Validators.minLength(10)]),
       metodo_pago: new FormControl('', Validators.required),
       telefono_comprador: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
+      ciudad_comprador: new FormControl('', [Validators.required]),
+      departamento_comprador: new FormControl('', [Validators.required]),
       tipo_documento: new FormControl('', Validators.required),
       documento_comprador: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{8,12}$')]),
       nota_adicional: new FormControl(''),
+      need_domicilio: new FormControl(false),
+    });
+    this.checkoutForm.statusChanges.subscribe(() => {
+      this.cdr.detectChanges();
     });
   }
 
   ngOnInit() {
+
+
+    // Cargar departamentos
+    this.departamentosService.getDepartamentos().subscribe({
+      next: (deps) => {
+        this.departamentos = deps.map(i => ({
+          value: i.id.toString(),
+          label: i.name
+        }));
+        this.cdr.detectChanges();
+      }
+    });
+
+    // Suscribirse a cambios en el departamento
+    this.getControl('departamento_comprador').valueChanges.subscribe({
+      next: (deptId) => {
+        console.log(deptId);
+        if (deptId) {
+          this.loadCiudades(deptId);
+        } else {
+          this.ciudades = [];
+          this.getControl('ciudad_comprador').setValue('');
+          this.cdr.detectChanges();
+        }
+      }
+    });
+
     this.cartService.getItemsObservable().subscribe((items) => {
       this.cartItems = items;
       this.calculateTotal();
     });
+
+    this.checkoutForm.get('need_domicilio')?.valueChanges.subscribe((needDomicilio) => {
+      this.shippingCost = needDomicilio ? 5000 : 0;
+      this.calculateTotal();
+    });
+
+  }
+
+
+  loadCiudades(deptId: string): void {
+    this.ciudadesService.getCiudadesByDepartamento(deptId).subscribe({
+      next: (cities) => {
+        this.ciudades = cities.map(city => ({
+          value: city.id.toString(),
+          label: city.name
+        }));
+        this.getControl('ciudad_comprador').setValue('');
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   calculateTotal() {
-    this.totalPrice = this.cartItems.reduce((total, item) => total + (item.precio * item.cantidad), 0);
+    this.totalPrice = this.cartItems.reduce((total, item) => total + (item.precio * item.cantidad) + this.shippingCost, 0);
   }
 
   get documentTypes() {

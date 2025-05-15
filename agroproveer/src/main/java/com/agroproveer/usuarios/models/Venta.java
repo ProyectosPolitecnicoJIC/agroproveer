@@ -20,8 +20,8 @@ public class Venta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fecha_venta")
-    private LocalDateTime fechaVenta = LocalDateTime.now();
+    @Column(name = "fecha_venta", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime fechaVenta;
 
     @Column(name = "nombre_completo", nullable = false)
     private String nombreCompleto;

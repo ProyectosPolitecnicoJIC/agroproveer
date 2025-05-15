@@ -9,17 +9,20 @@ import { ProductosComponent } from './basic/productos/productos.component';
 import { AdminproductosComponent } from './basic/adminproductos/adminproductos.component';
 import { CategoriasComponent } from './basic/categorias/categorias.component';
 import { LogoutComponent } from './authentication/logout/logout.component';
+import { PerfilComponent } from './basic/perfil/perfil.component';
+import { AgroproveerRoutes } from './utils/enum/routes';
+
 export const routes: Routes = [
-    { path: 'registro', component: RegisterComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'home', component: HomeComponent },
-    { path: 'about', component: AboutComponent },
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'cart', component: ShoppingcartComponent },
-    { path: 'checkout', component: CheckoutComponent },
-    { path: 'mercado', component: ProductosComponent },
-    { path: 'adminproductos', component: AdminproductosComponent },
-    { path: 'admincategorias', component: CategoriasComponent },
-    { path: 'logout', component: LogoutComponent }, // Redirect to login on logout
-    {   path: '**', redirectTo: '/home' } // Redirect to home for any unknown routes
+    { path: AgroproveerRoutes.REGISTER, component: RegisterComponent },
+    { path: AgroproveerRoutes.LOGIN, component: LoginComponent },
+    { path: AgroproveerRoutes.HOME, component: HomeComponent },
+    { path: AgroproveerRoutes.ABOUT, component: AboutComponent },
+    { path: AgroproveerRoutes.CART, component: ShoppingcartComponent },
+    { path: AgroproveerRoutes.CHECKOUT, component: CheckoutComponent },
+    { path: AgroproveerRoutes.MERCADO, component: ProductosComponent },
+    { path: AgroproveerRoutes.ADMINPRODUCTOS, component: AdminproductosComponent },
+    { path: AgroproveerRoutes.ADMINCATEGORIAS, component: CategoriasComponent },
+    { path: AgroproveerRoutes.LOGOUT, component: LogoutComponent }, 
+    { path: AgroproveerRoutes.PERFIL, component: PerfilComponent }, 
+    {   path: '**', redirectTo: AgroproveerRoutes.HOME } 
 ];

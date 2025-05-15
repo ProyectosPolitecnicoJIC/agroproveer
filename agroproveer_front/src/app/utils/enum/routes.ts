@@ -1,0 +1,16 @@
+export enum AgroproveerRoutes {
+    LOGIN = 'login',
+    REGISTER = 'register',
+    HOME = 'home',
+    ABOUT = 'about',
+    CART = 'cart',
+    CHECKOUT = 'checkout',
+    MERCADO = 'market',
+    ADMINPRODUCTOS = 'adminproducts',
+    ADMINCATEGORIAS = 'admincategories',
+    LOGOUT = 'logout',
+    PERFIL = 'profile',
+    PRODUCTOS = 'products',
+    CATEGORIAS = 'categories',
+    CARRITO = 'cart',
+}

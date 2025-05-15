@@ -5,8 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginService } from '../../authentication/services/login.service';
-import { Observable } from 'rxjs';
-
+import { Usuario } from '../../models/usuario.interface';
+import { AgroproveerRoutes } from '../../utils/enum/routes';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -27,6 +27,10 @@ export class HeaderComponent implements OnInit {
 
   constructor(private loginService: LoginService) { }
 
+  getUserData(): Usuario  {
+    return this.loginService.getUserData();
+  }
+
 
 
   ngOnInit(): void {
@@ -38,20 +42,20 @@ export class HeaderComponent implements OnInit {
   private updateNavigationItems(loggedIn: boolean): void {
     if (loggedIn) {
       this.navigationItems = [
-        { label: 'Inicio', route: '/home' },
-        { label: 'Mercado', route: '/mercado' },
-        { label: 'Sobre nosotros', route: '/about' },
-        { label: 'Perfil', route: '/perfil' },
-        { label: 'Cerrar sesión', route: '/logout' }
+        { label: 'Inicio', route: AgroproveerRoutes.HOME },
+        { label: 'Mercado', route: AgroproveerRoutes.MERCADO },
+        { label: 'Sobre nosotros', route: AgroproveerRoutes.ABOUT },
+        { label: 'Perfil', route: AgroproveerRoutes.PERFIL },
+        { label: 'Cerrar sesión', route: AgroproveerRoutes.LOGOUT }
       ];
       return;
     }
     this.navigationItems = [
-      { label: 'Inicio', route: '/home' },
-      { label: 'Mercado', route: '/mercado' },
-      { label: 'Sobre nosotros', route: '/about' },
-      { label: 'Iniciar sesión', route: '/login' },
-      { label: 'Registrarse', route: '/registro' }
+      { label: 'Inicio', route: AgroproveerRoutes.HOME },
+      { label: 'Mercado', route: AgroproveerRoutes.MERCADO },
+      { label: 'Sobre nosotros', route: AgroproveerRoutes.ABOUT },
+      { label: 'Iniciar sesión', route: AgroproveerRoutes.LOGIN },
+      { label: 'Registrarse', route: AgroproveerRoutes.REGISTER }
     ];
   }
 
