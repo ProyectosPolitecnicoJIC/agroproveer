@@ -33,6 +33,10 @@
 
       <div class="form-section">
         <h2>Dirección de Envío</h2>
+        <app-form-select [label]="'Selecciona el departamento'" [control]="getControl('departamento_comprador')"
+          [options]="departamentos" [mandatory]="true"></app-form-select>
+        <app-form-select [label]="'Selecciona la ciudad'" [control]="getControl('ciudad_comprador')" [options]="ciudades"
+          [mandatory]="true"></app-form-select>
         <app-form-input [label]="'Dirección Completa'" [inputType]="'textarea'"
           [control]="getControl('direccion_envio')" [placeholder]="'Ingresa tu dirección completa para el envío'"
           [mandatory]="true"></app-form-input>
@@ -72,7 +76,6 @@
           <div class="item-details">
             <h3>{{ item.nombre }}</h3>
             <p class="price">${{ item.precio | number:'1.0-0' }} x {{ item.cantidad }}</p>
-            <p class="subtotal">${{ (item.precio * item.cantidad) | number:'1.0-0' }}</p>
           </div>
         </div>
         }
@@ -80,7 +83,7 @@
       <div class="summary-total">
         <div class="total-row">
           <span>Subtotal</span>
-          <span>${{ totalPrice | number:'1.0-0' }}</span>
+          <span>${{ totalPrice - shippingCost | number:'1.0-0' }}</span>
         </div>
         <div class="total-row">
           <span>Envío</span>
