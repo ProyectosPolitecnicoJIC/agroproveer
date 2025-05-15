@@ -5,6 +5,7 @@ export interface Productos {
     precio: number;
     imagen: string;
     municipio: string;
-    vendedor_id: number;
-    categoria_id: number;
+    vendedor: number;
+    categoria: number;
+    cantidadDisponible: number;
 }

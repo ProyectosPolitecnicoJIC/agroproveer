@@ -39,11 +39,14 @@
             <app-form-input label="Correo electronico" placeholder="" icon="person" inputType="email"
                 [control]="CorreoControl" [enabled]="true" [mandatory]="true" />
             <!-- CONTRASEÑA -->
-            <app-form-input label="Contraseña" placeholder="" icon="lock" inputType="password" [control]="ContrasenaControl"
-                [enabled]="true" [mandatory]="true" [showTogglePassword]="true" />
+            <app-form-input label="Contraseña" placeholder="" icon="lock" inputType="password"
+                [control]="ContrasenaControl" [enabled]="true" [mandatory]="true" [showTogglePassword]="true" />
             <!-- CONFIRMAR CONTRASEÑA -->
             <app-form-input label="Confirmar contraseña" placeholder="" icon="lock" inputType="password"
-                [control]="ConfirmarContrasenaControl" [enabled]="true" [mandatory]="true" [showTogglePassword]="true" />
+                [control]="ConfirmarContrasenaControl" [enabled]="true" [mandatory]="true" [showTogglePassword]="true"
+                [errorMessage]="passwordMismatchError ? 'Las contraseñas no coinciden' : ''"
+                [showCustomError]="!passwordMismatchError" />
+
         </div>
 
         <div class="button-container">

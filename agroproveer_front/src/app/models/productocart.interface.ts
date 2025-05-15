@@ -4,7 +4,9 @@ export interface ProductoCart {
     descripcion: string;
     precio: number;
     imagen: string;
-    vendedor_id: number;
-    categoria_id: number;
+    vendedor: number;
+    categoria: number;
     cantidad: number;
+    municipio: string;
+    cantidadDisponible: number;
 }

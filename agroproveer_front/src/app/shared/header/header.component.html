@@ -9,12 +9,14 @@
     <!-- Navigation items -->
     <nav class="nav-items">
       @for (item of navigationItems; track item.label) {
-        <a mat-button 
-           [routerLink]="item.route"
-           routerLinkActive="active-link">
-          {{item.label}}
-        </a>
+      <a mat-button [routerLink]="item.route" routerLinkActive="active-link">
+        {{item.label}}
+      </a>
       }
     </nav>
+    <!-- userinfo -->
+    <div class="user-info">
+      <span class="user-name">{{ this.getUserData().nombre}}</span>
+    </div>
   </div>
 </mat-toolbar>

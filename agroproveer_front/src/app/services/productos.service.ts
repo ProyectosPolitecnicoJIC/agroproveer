@@ -7,7 +7,7 @@ import { Productos } from '../models/productos.interface';
   providedIn: 'root'
 })
 export class ProductosService {
-  private apiUrl = `https://29cbed90-c872-430d-bf89-f1bdf67eca6c.mock.pstmn.io/productos`;
+  private apiUrl = `http://localhost:8096/api/producto`;
 
   constructor(private http: HttpClient) { }
 

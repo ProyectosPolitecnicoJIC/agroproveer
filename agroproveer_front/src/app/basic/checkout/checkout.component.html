@@ -1,82 +1,58 @@
 <div class="checkout-container">
-  <div class="checkout-content">
-    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-content">
+    <div class="checkout-form">
+      <!-- DATOS PERSONALES -->
+
       <div class="form-section">
-        <h2>Información Personal</h2>
-        <app-form-input
-          [label]="'Nombre Completo'"
-          [inputType]="'text'"
-          [control]="getControl('nombre_comprador')"
-          [placeholder]="'Ingresa tu nombre completo'"
-          [mandatory]="true"
-        ></app-form-input>
+        <h2>Información Personal cliente</h2>
+        <app-form-input [label]="'Nombre Completo'" [inputType]="'text'" [control]="getControl('nombre_comprador')"
+          [placeholder]="'Ingresa tu nombre completo'" [mandatory]="true"></app-form-input>
 
-        <app-form-input
-          [label]="'Correo Electrónico'"
-          [inputType]="'email'"
-          [control]="getControl('correo_comprador')"
-          [placeholder]="'ejemplo@correo.com'"
-          [mandatory]="true"
-        ></app-form-input>
+        <app-form-input [label]="'Correo Electrónico'" [inputType]="'email'" [control]="getControl('correo_comprador')"
+          [placeholder]="'ejemplo@correo.com'" [mandatory]="true"></app-form-input>
 
-        <app-form-input
-          [label]="'Teléfono'"
-          [inputType]="'tel'"
-          [control]="getControl('telefono_comprador')"
-          [placeholder]="'10 dígitos'"
-          [mandatory]="true"
-        ></app-form-input>
+        <app-form-input [label]="'Teléfono'" [inputType]="'tel'" [control]="getControl('telefono_comprador')"
+          [placeholder]="'10 dígitos'" [mandatory]="true"></app-form-input>
       </div>
+
+      <!-- DOCUMENTO DE IDENTIDAD -->
 
       <div class="form-section">
         <h2>Documento de Identidad</h2>
         <div class="form-row">
-          <app-form-select
-            [label]="'Tipo de Documento'"
-            [control]="getControl('tipo_documento')"
-            [options]="documentTypes"
-            [mandatory]="true"
-          ></app-form-select>
+          <app-form-select [label]="'Tipo de Documento'" [control]="getControl('tipo_documento')"
+            [options]="documentTypes" [mandatory]="true"></app-form-select>
 
-          <app-form-input
-            [label]="'Número de Documento'"
-            [inputType]="'text'"
-            [control]="getControl('documento_comprador')"
-            [placeholder]="'Número de documento'"
-            [mandatory]="true"
-          ></app-form-input>
+          <app-form-input [label]="'Número de Documento'" [inputType]="'text'"
+            [control]="getControl('documento_comprador')" [placeholder]="'Número de documento'"
+            [mandatory]="true"></app-form-input>
         </div>
       </div>
 
+      <!-- DIRECCIÓN DE ENVÍO -->
+
       <div class="form-section">
         <h2>Dirección de Envío</h2>
-        <app-form-input
-          [label]="'Dirección Completa'"
-          [inputType]="'textarea'"
-          [control]="getControl('direccion_envio')"
-          [placeholder]="'Ingresa tu dirección completa para el envío'"
-          [mandatory]="true"
-        ></app-form-input>
+        <app-form-input [label]="'Dirección Completa'" [inputType]="'textarea'"
+          [control]="getControl('direccion_envio')" [placeholder]="'Ingresa tu dirección completa para el envío'"
+          [mandatory]="true"></app-form-input>
       </div>
+
+      <!-- METODO DE PAGO -->
 
       <div class="form-section">
         <h2>Método de Pago</h2>
-        <app-form-select
-          [label]="'Selecciona el método de pago'"
-          [control]="getControl('metodo_pago')"
-          [options]="paymentMethods"
-          [mandatory]="true"
-        ></app-form-select>
+        <app-form-select [label]="'Selecciona el método de pago'" [control]="getControl('metodo_pago')"
+          [options]="paymentMethods" [mandatory]="true"></app-form-select>
       </div>
+
+      <!-- NOTAS ADICIONALES -->
 
       <div class="form-section">
         <h2>Notas Adicionales</h2>
-        <app-form-input
-          [label]="'Notas para la entrega'"
-          [inputType]="'textarea'"
+        <app-form-input [label]="'Notas para la entrega'" [inputType]="'textarea'"
           [control]="getControl('nota_adicional')"
-          [placeholder]="'Instrucciones especiales para la entrega'"
-        ></app-form-input>
+          [placeholder]="'Instrucciones especiales para la entrega'"></app-form-input>
       </div>
 
       <div class="form-actions">
@@ -84,20 +60,21 @@
           Confirmar Compra
         </button>
       </div>
-    </form>
+    </div>
+
 
     <div class="summary-panel">
       <h2>Resumen de la Compra</h2>
       <div class="cart-items">
         @for (item of cartItems; track item.id) {
-          <div class="cart-item">
-            <img [src]="item.imagen" [alt]="item.nombre">
-            <div class="item-details">
-              <h3>{{ item.nombre }}</h3>
-              <p class="price">${{ item.precio | number:'1.0-0' }} x {{ item.cantidad }}</p>
-              <p class="subtotal">${{ (item.precio * item.cantidad) | number:'1.0-0' }}</p>
-            </div>
+        <div class="cart-item">
+          <img [src]="item.imagen" [alt]="item.nombre">
+          <div class="item-details">
+            <h3>{{ item.nombre }}</h3>
+            <p class="price">${{ item.precio | number:'1.0-0' }} x {{ item.cantidad }}</p>
+            <p class="subtotal">${{ (item.precio * item.cantidad) | number:'1.0-0' }}</p>
           </div>
+        </div>
         }
       </div>
       <div class="summary-total">
@@ -107,13 +84,20 @@
         </div>
         <div class="total-row">
           <span>Envío</span>
-          <span>Gratis</span>
+          <span>${{ shippingCost | number:'1.0-0' }}</span>
+
         </div>
+        <div class="total-row">
+          <app-form-checkbox [label]="'Envio a domicilio'" [control]="getControl('need_domicilio')" />
+
+        </div>
+
         <div class="total-row final">
           <span>Total</span>
           <span>${{ totalPrice | number:'1.0-0' }}</span>
         </div>
       </div>
     </div>
-  </div>
+
+  </form>
 </div>

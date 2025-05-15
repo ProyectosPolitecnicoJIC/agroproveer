@@ -16,4 +16,11 @@
   @if(hint){
     <mat-hint>{{ hint }}</mat-hint>
   }
+  <!-- Si errorMessage está definido y el campo NO tiene errores propios -->
+  @if(showCustomError){
+    <mat-error>
+      {{ errorMessage }}
+    </mat-error>
+  }
+  
 </mat-form-field>

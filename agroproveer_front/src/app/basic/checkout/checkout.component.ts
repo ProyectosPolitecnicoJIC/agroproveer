@@ -7,9 +7,8 @@ import { DocumentTypesService } from '../../core/services/document-types.service
 import { PaymentMethodsService } from '../../core/services/payment-methods.service';
 import { FormInputComponent } from '../../shared/form-input/form-input.component';
 import { FormSelectComponent } from '../../shared/form-select/form-select.component';
-import { MatIcon } from '@angular/material/icon';
 import { ProductoCart } from '../../models/productocart.interface';
-
+import { FormCheckboxComponent } from '../../shared/form-checkbox/form-checkbox.component';
 @Component({
   selector: 'app-checkout',
   standalone: true,
@@ -20,6 +19,7 @@ import { ProductoCart } from '../../models/productocart.interface';
     FormInputComponent,
     FormSelectComponent,
     DecimalPipe,
+    FormCheckboxComponent
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
@@ -28,6 +28,7 @@ export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
   cartItems: ProductoCart[] = [];
   totalPrice: number = 0;
+  shippingCost: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -41,9 +42,12 @@ export class CheckoutComponent implements OnInit {
       direccion_envio: new FormControl('', [Validators.required, Validators.minLength(10)]),
       metodo_pago: new FormControl('', Validators.required),
       telefono_comprador: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
+      ciudad_comprador: new FormControl('', [Validators.required]),
+      departamento_comprador: new FormControl('', [Validators.required]),
       tipo_documento: new FormControl('', Validators.required),
       documento_comprador: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{8,12}$')]),
       nota_adicional: new FormControl(''),
+      need_domicilio: new FormControl(false),
     });
   }
 
@@ -51,6 +55,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.getItemsObservable().subscribe((items) => {
       this.cartItems = items;
       this.calculateTotal();
+      this.shippingCost = this.checkoutForm.get('need_domicilio')?.value ? 5000 : 0;
     });
   }
 
