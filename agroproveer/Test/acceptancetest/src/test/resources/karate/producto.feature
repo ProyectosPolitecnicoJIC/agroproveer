@@ -24,7 +24,7 @@ Feature: CRUD de producto
       cantidadDisponible: '#number'
    }
   """
-@tag2
+@ProductoPorId
   Scenario Outline: Listar producto por id
     Given path '/producto/'+ id
     When method GET
@@ -48,7 +48,7 @@ Feature: CRUD de producto
     Examples:
       | id  |
       | 6   |
-  @tag4
+  @ProductoNoExiste
   Scenario Outline: Obtener un producto por ID que no existe
     Given path '/producto/' + id
     When method GET
