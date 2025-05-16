@@ -12,6 +12,8 @@ import { FormCheckboxComponent } from '../../shared/form-checkbox/form-checkbox.
 import { DepartamentosService } from '../../core/services/departamentos.service';
 import { CiudadesService } from '../../core/services/ciudades.service';
 import { CheckoutService } from '../../services/checkout.service';
+import { Router } from '@angular/router';
+import { AgroproveerRoutes } from '../../utils/enum/routes';
 @Component({
   selector: 'app-checkout',
   standalone: true,
@@ -43,7 +45,8 @@ export class CheckoutComponent implements OnInit {
     private departamentosService: DepartamentosService,
     private ciudadesService: CiudadesService,
     private cdr: ChangeDetectorRef,
-    private checkoutService: CheckoutService
+    private checkoutService: CheckoutService,
+    private router: Router
   ) {
     this.checkoutForm = this.fb.group({
       nombre_comprador: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -155,6 +158,13 @@ export class CheckoutComponent implements OnInit {
       this.checkoutService.createCheckout(checkoutData).subscribe({
         next: (response) => {
           console.log('Checkout successful:', response);
+          this.cartService.clearCart();
+          this.checkoutForm.reset();
+          this.shippingCost = 0;
+          this.totalPrice = 0;
+          this.router.navigate([AgroproveerRoutes.CHECKOUT_SUCCESS], {
+            queryParams: { id: response.id }
+          });
         },
         error: (error) => {
           console.error('Checkout error:', error);
