@@ -5,6 +5,7 @@ export enum AgroproveerRoutes {
     ABOUT = 'about',
     CART = 'cart',
     CHECKOUT = 'checkout',
+    CHECKOUT_SUCCESS = 'checkout/success',
     MERCADO = 'market',
     ADMINPRODUCTOS = 'adminproducts',
     ADMINCATEGORIAS = 'admincategories',

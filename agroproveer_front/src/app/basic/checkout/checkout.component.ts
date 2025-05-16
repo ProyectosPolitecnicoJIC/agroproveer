@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Checkout } from '../../models/checkout.interface';
+import { Checkout } from '../../models/checkout/checkout.interface';
 import { CartService } from '../../core/services/cart.service';
 import { DocumentTypesService } from '../../core/services/document-types.service';
 import { PaymentMethodsService } from '../../core/services/payment-methods.service';
@@ -11,6 +11,9 @@ import { ProductoCart } from '../../models/productocart.interface';
 import { FormCheckboxComponent } from '../../shared/form-checkbox/form-checkbox.component';
 import { DepartamentosService } from '../../core/services/departamentos.service';
 import { CiudadesService } from '../../core/services/ciudades.service';
+import { CheckoutService } from '../../services/checkout.service';
+import { Router } from '@angular/router';
+import { AgroproveerRoutes } from '../../utils/enum/routes';
 @Component({
   selector: 'app-checkout',
   standalone: true,
@@ -41,7 +44,9 @@ export class CheckoutComponent implements OnInit {
     private paymentMethodsService: PaymentMethodsService,
     private departamentosService: DepartamentosService,
     private ciudadesService: CiudadesService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private checkoutService: CheckoutService,
+    private router: Router
   ) {
     this.checkoutForm = this.fb.group({
       nombre_comprador: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -135,12 +140,36 @@ export class CheckoutComponent implements OnInit {
     if (this.checkoutForm.valid) {
       const checkoutData: Checkout = {
         id: 0,
-        productos: this.cartItems,
-        fecha_venta: new Date(),
-        ...this.checkoutForm.value,
-        total_pagar: this.totalPrice
+        nombreCompleto: this.getControl('nombre_comprador').value,
+        correo: this.getControl('correo_comprador').value,
+        direccionEnvio: this.getControl('direccion_envio').value,
+        metodoPago: this.getControl('metodo_pago').value,
+        telefono: this.getControl('telefono_comprador').value,
+        documento: this.getControl('documento_comprador').value,
+        tipoDocumento: this.getControl('tipo_documento').value,
+        totalPagar: this.totalPrice,
+        nota: this.getControl('nota_adicional').value,
+        productos: this.cartItems.map(item => ({
+          productoId: item.id,
+          precioUnitario: item.precio,
+          cantidad: item.cantidad
+        }))
       };
-      console.log('Checkout data:', checkoutData);
+      this.checkoutService.createCheckout(checkoutData).subscribe({
+        next: (response) => {
+          console.log('Checkout successful:', response);
+          this.cartService.clearCart();
+          this.checkoutForm.reset();
+          this.shippingCost = 0;
+          this.totalPrice = 0;
+          this.router.navigate([AgroproveerRoutes.CHECKOUT_SUCCESS], {
+            queryParams: { id: response.id }
+          });
+        },
+        error: (error) => {
+          console.error('Checkout error:', error);
+        }
+      });
     }
   }
 }
