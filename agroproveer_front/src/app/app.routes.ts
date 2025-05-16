@@ -11,6 +11,7 @@ import { CategoriasComponent } from './basic/categorias/categorias.component';
 import { LogoutComponent } from './authentication/logout/logout.component';
 import { PerfilComponent } from './basic/perfil/perfil.component';
 import { AgroproveerRoutes } from './utils/enum/routes';
+import { CheckoutsummaryComponent } from './basic/checkoutsummary/checkoutsummary.component';
 
 export const routes: Routes = [
     { path: AgroproveerRoutes.REGISTER, component: RegisterComponent },
@@ -24,5 +25,6 @@ export const routes: Routes = [
     { path: AgroproveerRoutes.ADMINCATEGORIAS, component: CategoriasComponent },
     { path: AgroproveerRoutes.LOGOUT, component: LogoutComponent }, 
     { path: AgroproveerRoutes.PERFIL, component: PerfilComponent }, 
+    { path: AgroproveerRoutes.CHECKOUT_SUCCESS, component: CheckoutsummaryComponent },
     {   path: '**', redirectTo: AgroproveerRoutes.HOME } 
 ];
