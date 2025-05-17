@@ -1,16 +1,13 @@
 <div class="profile-container">
     <!-- Header del perfil -->
     <div class="profile-header">
-        <div class="profile-avatar">
-            <i class="fas fa-user-circle"></i>
-        </div>
+        
         <h1>{{userForm.get('nombre')?.value}} {{userForm.get('apellido')?.value}}</h1>
-        <p class="user-role">Usuario</p>
     </div>
 
     <!-- Navegación rápida -->
     <div class="quick-links">
-        <a href="/mis-productos" class="quick-link">
+        <a  class="quick-link">
             <i class="fas fa-box"></i>
             Mis Productos
         </a>
@@ -28,11 +25,7 @@
 
         <form [formGroup]="userForm" class="info-grid">
             <div class="info-group">
-                <app-form-input 
-                    label="Nombre" 
-                    [control]="getControl('nombre')" 
-                    [enabled]="editando" 
-                    inputType="text">
+                <app-form-input label="Nombre" [control]="getControl('nombre')" [enabled]="editando" inputType="text">
                 </app-form-input>
             </div>
             <div class="info-group">
@@ -40,7 +33,8 @@
                 </app-form-input>
             </div>
             <div class="info-group">
-                <app-form-input label="Correo Electrónico" [control]="getControl('correo')" [enabled]="editando" type="email">
+                <app-form-input label="Correo Electrónico" [control]="getControl('correo')" [enabled]="editando"
+                    type="email">
                 </app-form-input>
             </div>
             <div class="info-group">
@@ -56,19 +50,32 @@
                     [options]="documentTypes">
                 </app-form-select>
             </div>
-            <div class="info-group full-width">
+            <div class="info-group">
                 <app-form-input label="Dirección" [control]="getControl('direccion')" [enabled]="editando" type="text">
                 </app-form-input>
             </div>
             <div class="info-group">
+                @if(editando) {
                 <app-form-select label="Departamento" [control]="getControl('departamento')" [enabled]="editando"
                     [options]="departamentos">
                 </app-form-select>
+                } @else {
+                    <app-form-input label="Departamento" [control]="getControl('departamento')" [enabled]="editando"
+                        inputType="text">
+                    </app-form-input>
+                }
             </div>
             <div class="info-group">
-                <app-form-select label="Municipio" [control]="getControl('municipio')" [enabled]="editando" [options]="ciudades">
+                @if(editando) {
+                <app-form-select label="Municipio" [control]="getControl('municipio')" [enabled]="editando"
+                    [options]="ciudades">
                 </app-form-select>
+                } @else {
+                    <app-form-input label="Municipio" [control]="getControl('municipio')" [enabled]="editando"
+                        inputType="text">
+                    </app-form-input>
+                }
             </div>
         </form>
     </div>
-</div>  
+</div>

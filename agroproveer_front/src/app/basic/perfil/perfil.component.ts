@@ -8,8 +8,7 @@ import { CiudadesService } from '../../core/services/ciudades.service';
 import { DocumentTypesService } from '../../core/services/document-types.service';
 import { FormInputComponent } from '../../shared/form-input/form-input.component';
 import { FormSelectComponent } from '../../shared/form-select/form-select.component';
-import { Departamento } from '../../models/departamento.interface';
-import { Ciudad } from '../../models/ciudad.interface';
+import { PerfilService } from '../../services/perfil.service';
 
 @Component({
   selector: 'app-perfil',
@@ -29,6 +28,8 @@ export class PerfilComponent implements OnInit {
   departamentos: { value: string; label: string }[] = [];
   ciudades: { value: string; label: string }[] = [];
   documentTypes: { value: string; label: string }[] = [];
+  documentoToken: string = '';
+  private token: string = localStorage.getItem('token') || "";
 
 
   userForm: FormGroup;
@@ -36,7 +37,8 @@ export class PerfilComponent implements OnInit {
   constructor(
     private departamentosService: DepartamentosService,
     private ciudadesService: CiudadesService,
-    private documentTypesService: DocumentTypesService
+    private documentTypesService: DocumentTypesService,
+    private perfilService: PerfilService
   ) {
     this.userForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
@@ -62,6 +64,11 @@ export class PerfilComponent implements OnInit {
     this.cargarDatosUsuario();
     this.cargarDepartamentos();
 
+    this.documentoToken = JSON.parse(localStorage.getItem('userData') || '{}').cedula;
+    this.cargarDatosUsuario();
+
+    
+
     this.getControl('departamento').valueChanges.subscribe(departamentoId => {
       if (departamentoId) {
         this.cargarCiudades(departamentoId);
@@ -73,8 +80,12 @@ export class PerfilComponent implements OnInit {
 
     Object.keys(this.userForm.controls).forEach(key => {
       const control = this.getControl(key);
-      if (this.editando) {
-        control.enable();
+      if(key != 'tipoDocumento' && key != 'documento'){
+        if (this.editando) {
+          control.enable();
+        } else {
+          control.disable();
+        }
       } else {
         control.disable();
       }
@@ -85,6 +96,19 @@ export class PerfilComponent implements OnInit {
 
   cargarDatosUsuario() {
     // Implementar la carga de datos del usuario
+    console.log(this.token);
+    this.perfilService.getPerfil(this.documentoToken, this.token).subscribe(usuario => {
+      console.log(usuario);
+      this.userForm.get('documento')?.setValue(usuario.documento);
+      this.userForm.get('tipoDocumento')?.setValue(usuario.tipoDocumento);
+      this.userForm.get('departamento')?.setValue(usuario.departamento);
+      this.userForm.get('municipio')?.setValue(usuario.municipio);
+      this.userForm.get('nombre')?.setValue(usuario.nombre);
+      this.userForm.get('apellido')?.setValue(usuario.apellido);
+      this.userForm.get('correo')?.setValue(usuario.correo);
+      this.userForm.get('telefono')?.setValue(usuario.telefono);
+      this.userForm.get('direccion')?.setValue(usuario.direccion);
+    });
   }
 
   guardarCambios() {
@@ -100,8 +124,12 @@ export class PerfilComponent implements OnInit {
     // Actualizar el estado de los controles
     Object.keys(this.userForm.controls).forEach(key => {
       const control = this.getControl(key);
-      if (this.editando) {
-        control.enable();
+      if(key != 'tipoDocumento' && key != 'documento'){
+        if (this.editando) {
+          control.enable();
+        } else {
+          control.disable();
+        }
       } else {
         control.disable();
       }
