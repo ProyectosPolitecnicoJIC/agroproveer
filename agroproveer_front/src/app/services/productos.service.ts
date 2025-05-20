@@ -23,7 +23,15 @@ export class ProductosService {
     return this.http.get<Productos>(`${this.apiUrl}/${id}`);
   }
 
-  createProducto(producto: Productos): Observable<Productos> {
-    return this.http.post<Productos>(this.apiUrl, producto);
+  createProducto(producto: Productos, token: string): Observable<Productos> {
+    return this.http.post<Productos>(this.apiUrl, producto, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+  }
+
+  updateProducto(producto: Partial<Productos>, token: string): Observable<Productos> {
+    return this.http.put<Productos>(`${this.apiUrl}/actualizar`, producto, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
   }
 } 

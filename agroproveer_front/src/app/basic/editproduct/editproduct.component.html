@@ -1,0 +1,74 @@
+<div class="edit-product-container">
+    <h2 mat-dialog-title>{{ data ? 'Editar Producto' : 'Nuevo Producto' }}</h2>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <mat-dialog-content>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" required>
+          <mat-error *ngIf="productForm.get('nombre')?.hasError('required')">
+            El nombre es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="descripcion" required rows="3"></textarea>
+          <mat-error *ngIf="productForm.get('descripcion')?.hasError('required')">
+            La descripción es requerida
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Precio</mat-label>
+          <input matInput type="number" formControlName="precio" required>
+          <mat-error *ngIf="productForm.get('precio')?.hasError('required')">
+            El precio es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Imagen URL</mat-label>
+          <input matInput formControlName="imagenUrl" required>
+          <mat-error *ngIf="productForm.get('imagenUrl')?.hasError('required')">
+            La URL de la imagen es requerida
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Municipio</mat-label>
+          <input matInput formControlName="municipio" required>
+          <mat-error *ngIf="productForm.get('municipio')?.hasError('required')">
+            El municipio es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Categoría</mat-label>
+          <mat-select formControlName="categoria" required>
+            <mat-option value="" disabled selected>Seleccione una categoría</mat-option>
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
+              {{ categoria.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="productForm.get('categoria')?.hasError('required')">
+            La categoría es requerida
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Cantidad Disponible</mat-label>
+          <input matInput type="number" formControlName="cantidadDisponible" required>
+          <mat-error *ngIf="productForm.get('cantidadDisponible')?.hasError('required')">
+            La cantidad disponible es requerida
+          </mat-error>
+        </mat-form-field>
+      </mat-dialog-content>
+
+      <mat-dialog-actions align="end">
+        <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+          {{ data ? 'Guardar' : 'Crear' }}
+        </button>
+      </mat-dialog-actions>
+    </form>
+  </div>

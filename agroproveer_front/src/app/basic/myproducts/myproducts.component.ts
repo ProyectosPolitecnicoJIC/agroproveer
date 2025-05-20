@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { EditproductComponent } from '../editproduct/editproduct.component';
 
 @Component({
   selector: 'app-myproducts',
@@ -17,7 +19,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   templateUrl: './myproducts.component.html',
   styleUrl: './myproducts.component.css'
@@ -31,7 +34,8 @@ export class MyproductsComponent implements OnInit {
 
   constructor(
     private productosService: ProductosService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +60,20 @@ export class MyproductsComponent implements OnInit {
     });
   }
 
+  openEditDialog(producto?: Productos): void {
+    console.log(producto);
+    const dialogRef = this.dialog.open(EditproductComponent, {
+      data: producto || null,
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadProducts();
+      }
+    });
+  }
+
   deleteProduct(id: number): void {
     // TODO: Implement delete functionality
     this.snackBar.open('Función de eliminación pendiente', 'Cerrar', {
@@ -64,9 +82,9 @@ export class MyproductsComponent implements OnInit {
   }
 
   editProduct(id: number): void {
-    // TODO: Implement edit functionality
-    this.snackBar.open('Función de edición pendiente', 'Cerrar', {
-      duration: 3000
-    });
+    const producto = this.productos.find(p => p.id === id);
+    if (producto) {
+      this.openEditDialog(producto);
+    }
   }
 }

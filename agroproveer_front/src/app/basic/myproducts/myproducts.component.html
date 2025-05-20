@@ -1,7 +1,7 @@
 <div class="products-container">
   <div class="header">
     <h1>Mis Productos</h1>
-    <button mat-raised-button color="primary" class="add-button">
+    <button mat-raised-button color="primary" class="add-button" (click)="openEditDialog()">
       <mat-icon>add</mat-icon>
       Agregar Producto
     </button>
@@ -46,7 +46,7 @@
     <mat-icon class="empty-icon">inventory_2</mat-icon>
     <h2>No tienes productos</h2>
     <p>Comienza agregando tu primer producto</p>
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" (click)="openEditDialog()">
       <mat-icon>add</mat-icon>
       Agregar Producto
     </button>
