@@ -28,6 +28,11 @@ public class ProductoRest {
         return ResponseEntity.ok(productoService.getAllProducto());
     }
 
+    @GetMapping(value = "/vendedor/{vendedor}")
+    private ResponseEntity<List<Producto>> listAllProductoByVendedor(@PathVariable String vendedor) {
+        return ResponseEntity.ok(productoService.getProductosByVendedor(vendedor));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getProducto(@PathVariable Long id) {
         Optional<Producto> productos = productoService.findById(id);

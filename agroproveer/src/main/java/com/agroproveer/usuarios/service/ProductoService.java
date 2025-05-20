@@ -25,6 +25,9 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
+    public List<Producto> getProductosByVendedor(String vendedor) {
+        return productoRepository.findByVendedor(vendedor);
+    }
 
     public List<Producto> getAllProducto() {
         return productoRepository.findAll();
