@@ -8,6 +8,8 @@ import { FormSelectComponent } from '../../shared/form-select/form-select.compon
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoriasService } from '../../services/categorias.service';
 import { Categorias } from '../../models/categorias.interface';
+import { AgroproveerRoutes } from '../../utils/enum/routes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adminproductos',
@@ -33,7 +35,9 @@ export class AdminproductosComponent implements OnInit {
     private fb: FormBuilder,
     private productosService: ProductosService,
     private categoriasService: CategoriasService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router,
+
   ) {
     this.productForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],

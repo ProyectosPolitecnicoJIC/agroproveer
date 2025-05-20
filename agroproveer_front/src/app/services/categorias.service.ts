@@ -7,7 +7,7 @@ import { Categorias } from '../models/categorias.interface';
   providedIn: 'root'
 })
 export class CategoriasService {
-  private apiUrl = `https://29cbed90-c872-430d-bf89-f1bdf67eca6c.mock.pstmn.io/categorias`;
+  private apiUrl = `https://localhost:8096/api/categoria`;
 
   constructor(private http: HttpClient) { }
 

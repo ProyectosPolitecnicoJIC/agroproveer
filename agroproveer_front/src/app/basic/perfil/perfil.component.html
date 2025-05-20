@@ -1,13 +1,81 @@
-<div>
+<div class="profile-container">
+    <!-- Header del perfil -->
+    <div class="profile-header">
+        
+        <h1>{{userForm.get('nombre')?.value}} {{userForm.get('apellido')?.value}}</h1>
+    </div>
 
-    <!-- INFORMACION DEL PERFIL -->
+    <!-- Navegación rápida -->
+    <div class="quick-links">
+        <a  class="quick-link">
+            <i class="fas fa-box"></i>
+            Mis Productos
+        </a>
+    </div>
 
-    <!-- INFORMACION EDITABLE DEL PERFIL -->
+    <!-- Información del perfil -->
+    <div class="profile-info">
+        <div class="section-header">
+            <h2>Información Personal</h2>
+            <button class="edit-button" (click)="toggleEdicion()">
+                <i class="fas" [ngClass]="editando ? 'fa-save' : 'fa-edit'"></i>
+                {{editando ? 'Guardar' : 'Editar'}}
+            </button>
+        </div>
 
-    
-
-
-
-
-
+        <form [formGroup]="userForm" class="info-grid">
+            <div class="info-group">
+                <app-form-input label="Nombre" [control]="getControl('nombre')" [enabled]="editando" inputType="text">
+                </app-form-input>
+            </div>
+            <div class="info-group">
+                <app-form-input label="Apellido" [control]="getControl('apellido')" [enabled]="editando" type="text">
+                </app-form-input>
+            </div>
+            <div class="info-group">
+                <app-form-input label="Correo Electrónico" [control]="getControl('correo')" [enabled]="editando"
+                    type="email">
+                </app-form-input>
+            </div>
+            <div class="info-group">
+                <app-form-input label="Teléfono" [control]="getControl('telefono')" [enabled]="editando" type="tel">
+                </app-form-input>
+            </div>
+            <div class="info-group">
+                <app-form-input label="Documento" [control]="getControl('documento')" [enabled]="editando" type="text">
+                </app-form-input>
+            </div>
+            <div class="info-group">
+                <app-form-select label="Tipo de Documento" [control]="getControl('tipoDocumento')" [enabled]="editando"
+                    [options]="documentTypes">
+                </app-form-select>
+            </div>
+            <div class="info-group">
+                <app-form-input label="Dirección" [control]="getControl('direccion')" [enabled]="editando" type="text">
+                </app-form-input>
+            </div>
+            <div class="info-group">
+                @if(editando) {
+                <app-form-select label="Departamento" [control]="getControl('departamento')" [enabled]="editando"
+                    [options]="departamentos">
+                </app-form-select>
+                } @else {
+                    <app-form-input label="Departamento" [control]="getControl('departamento')" [enabled]="editando"
+                        inputType="text">
+                    </app-form-input>
+                }
+            </div>
+            <div class="info-group">
+                @if(editando) {
+                <app-form-select label="Municipio" [control]="getControl('municipio')" [enabled]="editando"
+                    [options]="ciudades">
+                </app-form-select>
+                } @else {
+                    <app-form-input label="Municipio" [control]="getControl('municipio')" [enabled]="editando"
+                        inputType="text">
+                    </app-form-input>
+                }
+            </div>
+        </form>
+    </div>
 </div>
