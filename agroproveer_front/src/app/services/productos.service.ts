@@ -15,6 +15,10 @@ export class ProductosService {
     return this.http.get<Productos[]>(this.apiUrl);
   }
 
+  getProductosByUser(id: number, token: string): Observable<Productos[]> {
+    return this.http.get<Productos[]>(`${this.apiUrl}/vendedor/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
+  }
+
   getProductoById(id: number): Observable<Productos> {
     return this.http.get<Productos>(`${this.apiUrl}/${id}`);
   }

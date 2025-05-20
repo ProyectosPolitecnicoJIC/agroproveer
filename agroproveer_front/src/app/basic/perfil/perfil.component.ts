@@ -9,6 +9,7 @@ import { DocumentTypesService } from '../../core/services/document-types.service
 import { FormInputComponent } from '../../shared/form-input/form-input.component';
 import { FormSelectComponent } from '../../shared/form-select/form-select.component';
 import { PerfilService } from '../../services/perfil.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -38,7 +39,8 @@ export class PerfilComponent implements OnInit {
     private departamentosService: DepartamentosService,
     private ciudadesService: CiudadesService,
     private documentTypesService: DocumentTypesService,
-    private perfilService: PerfilService
+    private perfilService: PerfilService,
+    private router: Router
   ) {
     this.userForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
@@ -150,5 +152,9 @@ export class PerfilComponent implements OnInit {
 
   cargarDocumentTypes() {
     this.documentTypes = this.documentTypesService.getDocumentTypes();
+  }
+
+  goToMyProducts() {
+    this.router.navigate(['/my-products']);
   }
 }
