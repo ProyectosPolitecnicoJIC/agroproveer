@@ -76,7 +76,7 @@ public class ProductoRest {
         }
     }
 
-    @PostMapping(value = "/actualizar")
+    @PutMapping(value = "/actualizar")
     private ResponseEntity<?> actualizarProducto(@RequestBody Producto producto) {
         try {
             if (productoService.existsById(producto.getId())) {

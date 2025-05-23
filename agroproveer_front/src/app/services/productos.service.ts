@@ -24,13 +24,20 @@ export class ProductosService {
   }
 
   createProducto(producto: Productos, token: string): Observable<Productos> {
-    return this.http.post<Productos>(this.apiUrl, producto, {
+    return this.http.post<Productos>(this.apiUrl+"/save", producto, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
   }
 
   updateProducto(producto: Partial<Productos>, token: string): Observable<Productos> {
+    console.log(producto);
     return this.http.put<Productos>(`${this.apiUrl}/actualizar`, producto, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+  }
+
+  deleteProducto(id: number, token: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/eliminar/${id}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
   }

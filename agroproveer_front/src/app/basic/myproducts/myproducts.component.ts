@@ -75,9 +75,18 @@ export class MyproductsComponent implements OnInit {
   }
 
   deleteProduct(id: number): void {
-    // TODO: Implement delete functionality
-    this.snackBar.open('Función de eliminación pendiente', 'Cerrar', {
-      duration: 3000
+    this.productosService.deleteProducto(id, this.token || '').subscribe({
+      next: () => {
+        this.loadProducts();
+        this.snackBar.open('Producto eliminado correctamente', 'Cerrar', {
+          duration: 3000
+        });
+      },
+      error: (error) => {
+        this.snackBar.open('Error al eliminar el producto', 'Cerrar', {
+          duration: 3000
+        });
+      }
     });
   }
 

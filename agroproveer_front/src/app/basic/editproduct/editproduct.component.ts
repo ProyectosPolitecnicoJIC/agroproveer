@@ -64,9 +64,10 @@ export class EditproductComponent implements OnInit {
       const formData = this.productForm.value;
       const userDocument = JSON.parse(localStorage.getItem("userData") || '{}').cedula;
       const token = localStorage.getItem("token") || '';
-
+      formData.vendedor = userDocument;
       if (this.data) {
         // Update existing product
+        formData.id = this.data.id;
         this.productosService.updateProducto(formData, token).subscribe({
           next: () => {
             this.snackBar.open('Producto actualizado exitosamente', 'Cerrar', { duration: 3000 });
@@ -78,7 +79,6 @@ export class EditproductComponent implements OnInit {
         });
       } else {
         // Create new product
-        formData.vendedor = userDocument;
         this.productosService.createProducto(formData, token).subscribe({
           next: () => {
             this.snackBar.open('Producto creado exitosamente', 'Cerrar', { duration: 3000 });
