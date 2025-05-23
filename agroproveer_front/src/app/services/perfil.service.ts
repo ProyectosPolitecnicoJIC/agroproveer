@@ -15,4 +15,8 @@ export class PerfilService {
   getPerfil(numeroDocumento: string, token: string): Observable<Usuario> {
     return this.http.get<Usuario>(this.apiUrl + '/' + numeroDocumento, { headers: { 'Authorization':  'Bearer '+token } });
   }
+
+  updatePerfil(usuario: Usuario, token: string): Observable<Usuario> {
+    return this.http.put<Usuario>(this.apiUrl + '/actualizar', usuario, { headers: { 'Authorization':  'Bearer '+token } });
+  }
 }
