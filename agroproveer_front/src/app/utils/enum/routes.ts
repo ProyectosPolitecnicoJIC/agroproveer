@@ -14,4 +14,5 @@ export enum AgroproveerRoutes {
     PRODUCTOS = 'products',
     CATEGORIAS = 'categories',
     CARRITO = 'cart',
+    MYPRODUCTS = 'my-products',
 }

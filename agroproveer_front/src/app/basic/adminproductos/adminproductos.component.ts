@@ -30,6 +30,7 @@ export class AdminproductosComponent implements OnInit {
   error = '';
   categorias: Categorias[] = [];
   categoriasLoading = false;
+  private token: string | null = localStorage.getItem("token");
 
   constructor(
     private fb: FormBuilder,
@@ -82,7 +83,7 @@ export class AdminproductosComponent implements OnInit {
         ...this.productForm.value
       };
 
-      this.productosService.createProducto(productData).subscribe({
+      this.productosService.createProducto(productData, this.token || '').subscribe({
         next: (response) => {
           this.loading = false;
           this.snackBar.open('Producto creado exitosamente', 'Cerrar', {

@@ -9,7 +9,8 @@ import { DocumentTypesService } from '../../core/services/document-types.service
 import { FormInputComponent } from '../../shared/form-input/form-input.component';
 import { FormSelectComponent } from '../../shared/form-select/form-select.component';
 import { PerfilService } from '../../services/perfil.service';
-
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-perfil',
   standalone: true,
@@ -24,7 +25,7 @@ import { PerfilService } from '../../services/perfil.service';
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent implements OnInit {
-  
+
   departamentos: { value: string; label: string }[] = [];
   ciudades: { value: string; label: string }[] = [];
   documentTypes: { value: string; label: string }[] = [];
@@ -38,7 +39,9 @@ export class PerfilComponent implements OnInit {
     private departamentosService: DepartamentosService,
     private ciudadesService: CiudadesService,
     private documentTypesService: DocumentTypesService,
-    private perfilService: PerfilService
+    private perfilService: PerfilService,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.userForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
@@ -67,7 +70,7 @@ export class PerfilComponent implements OnInit {
     this.documentoToken = JSON.parse(localStorage.getItem('userData') || '{}').cedula;
     this.cargarDatosUsuario();
 
-    
+
 
     this.getControl('departamento').valueChanges.subscribe(departamentoId => {
       if (departamentoId) {
@@ -80,7 +83,7 @@ export class PerfilComponent implements OnInit {
 
     Object.keys(this.userForm.controls).forEach(key => {
       const control = this.getControl(key);
-      if(key != 'tipoDocumento' && key != 'documento'){
+      if (key != 'tipoDocumento' && key != 'documento') {
         if (this.editando) {
           control.enable();
         } else {
@@ -111,20 +114,18 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  guardarCambios() {
-    if (this.userForm.valid) {
-      // Implementar el guardado de cambios
-      this.editando = false;
-      this.toggleEdicion(); // Esto deshabilitará los controles
-    }
-  }
+
 
   toggleEdicion() {
+    if (this.editando && this.userForm.valid) {
+      this.savePerfil();
+    }
+
     this.editando = !this.editando;
     // Actualizar el estado de los controles
     Object.keys(this.userForm.controls).forEach(key => {
       const control = this.getControl(key);
-      if(key != 'tipoDocumento' && key != 'documento'){
+      if (key != 'tipoDocumento' && key != 'documento') {
         if (this.editando) {
           control.enable();
         } else {
@@ -150,5 +151,28 @@ export class PerfilComponent implements OnInit {
 
   cargarDocumentTypes() {
     this.documentTypes = this.documentTypesService.getDocumentTypes();
+  }
+
+  goToMyProducts() {
+    this.router.navigate(['/my-products']);
+  }
+
+  savePerfil() {
+    let perfil: Usuario = this.userForm.value;
+    perfil.documento = this.userForm.get('documento')?.value;
+    perfil.rol = JSON.parse(localStorage.getItem('userData') || '{}').rol;
+    perfil.tipoDocumento = this.userForm.get('tipoDocumento')?.value;
+    console.log(perfil);
+    this.perfilService.updatePerfil(perfil, this.token).subscribe(response => {
+      console.log(response);
+      this.snackBar.open('Perfil actualizado correctamente', 'Cerrar', {
+        duration: 3000
+      });
+    }, error => {
+      this.snackBar.open('Error al actualizar el perfil', 'Cerrar', {
+        duration: 3000
+      });
+    });
+
   }
 }

@@ -1,0 +1,54 @@
+<div class="products-container">
+  <div class="header">
+    <h1>Mis Productos</h1>
+    <button mat-raised-button color="primary" class="add-button" (click)="openEditDialog()">
+      <mat-icon>add</mat-icon>
+      Agregar Producto
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Cargando productos...</p>
+  </div>
+
+  <div *ngIf="error" class="error-container">
+    <mat-icon class="error-icon">error</mat-icon>
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="!loading && !error" class="products-grid">
+    <mat-card *ngFor="let producto of productos" class="product-card">
+      <img mat-card-image [src]="producto.imagen || 'assets/images/placeholder.png'" alt="{{ producto.nombre }}">
+      <mat-card-content>
+        <h2>{{ producto.nombre }}</h2>
+        <p class="price">${{ producto.precio | number:'1.2-2' }}</p>
+        <p class="description">{{ producto.descripcion }}</p>
+        <div class="product-details">
+          <span class="stock">Stock: {{ producto.cantidadDisponible }}</span>
+          <span class="category">{{ producto.categoria }}</span>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="editProduct(producto.id)">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+        <button mat-button color="warn" (click)="deleteProduct(producto.id)">
+          <mat-icon>delete</mat-icon>
+          Eliminar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!loading && !error && productos.length === 0" class="empty-state">
+    <mat-icon class="empty-icon">inventory_2</mat-icon>
+    <h2>No tienes productos</h2>
+    <p>Comienza agregando tu primer producto</p>
+    <button mat-raised-button color="primary" (click)="openEditDialog()">
+      <mat-icon>add</mat-icon>
+      Agregar Producto
+    </button>
+  </div>
+</div>

@@ -27,7 +27,20 @@ public class UsuarioService {
     }
 
     public Usuario update(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+        Optional<Usuario> existingUsuario = usuarioRepository.findById(usuario.getDocumento());
+    
+    if (existingUsuario.isPresent()) {
+        Usuario existing = existingUsuario.get();
+        
+        // Si la contraseña está vacía o nula, mantener la existente
+        if (usuario.getContrasena() == null || usuario.getContrasena().trim().isEmpty()) {
+            usuario.setContrasena(existing.getContrasena());
+        } else {
+            // Si se proporciona una nueva contraseña, codificarla
+            usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
+        }
+    }
+    return usuarioRepository.save(usuario);
     }
 
 

@@ -69,10 +69,11 @@ public class UsuarioRest {
         }
     }
 
-    @PostMapping(value = "/actualizar")
+    @PutMapping(value = "/actualizar")
     private ResponseEntity<?> actualizarUsuario(@RequestBody Usuario usuario) {
         try {
             if (usuarioService.existsById(usuario.getDocumento())) {
+
                 Usuario temp = usuarioService.update(usuario);
 //                webSocketService.sendPropietarioUpdate(temp);
                 return ResponseEntity.ok(temp);
