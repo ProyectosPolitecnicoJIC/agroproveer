@@ -1,0 +1,83 @@
+<div class="buscar-orden-container">
+  <div class="search-section">
+    <h1>Buscar Orden</h1>
+    <div class="search-box">
+      <input 
+        type="text" 
+        [(ngModel)]="ordenId" 
+        placeholder="Ingresa el número de tu orden"
+        class="search-input"
+      >
+      <button 
+        (click)="buscarOrden()" 
+        class="search-button"
+        [disabled]="loading"
+      >
+        @if(loading){
+          <span class="spinner"></span>
+        } @else {
+          Buscar
+        }
+      </button>
+    </div>
+    @if(error){
+      <div class="error-message">
+        {{ error }}
+      </div>
+    }
+  </div>
+
+  @if(orden){
+    <div class="orden-details">
+      <div class="orden-header">
+        <h2>Orden #{{ orden.id }}</h2>
+        <span class="estado-badge" [class]="getEstadoClass(orden.metodoPago)">
+          {{ orden.metodoPago }}
+        </span>
+      </div>
+
+      <div class="orden-info">
+        <div class="info-section">
+          <h3>Información de la Orden</h3>
+          <p><strong>Fecha:</strong> {{ orden.fechaVenta | date:'medium' }}</p>
+          <p><strong>Total:</strong> ${{ orden.totalPagar | number:'1.0-0' }}</p>
+        </div>
+
+        @if(isLoggedIn && orden.nombreCompleto){
+          <div class="info-section">
+            <h3>Información del Cliente</h3>
+            <p><strong>Nombre:</strong> {{ orden.nombreCompleto }}</p>
+            <p><strong>Email:</strong> {{ orden.correo }}</p>
+            @if(orden.telefono){
+              <p><strong>Teléfono:</strong> {{ orden.telefono }}</p>
+            }
+          </div>
+
+          @if(orden.direccionEnvio){
+            <div class="info-section">
+              <h3>Dirección de Entrega</h3>
+              <p>{{ orden.direccionEnvio }}</p>
+            </div>
+          }
+        }
+
+        <div class="productos-section">
+          <h3>Productos</h3>
+          <div class="productos-grid">
+            @for(producto of orden.productosVendidos; track producto.id){
+              <div class="producto-card">
+                <img [src]="producto.producto.imagenUrl" [alt]="producto.producto.nombre" class="producto-imagen">
+                <div class="producto-info">
+                  <h4>{{ producto.producto.nombre }}</h4>
+                  <p>Cantidad: {{ producto.cantidad }}</p>
+                  <p>Precio unitario: ${{ producto.precioUnitario | number:'1.0-0' }}</p>
+                  <p class="subtotal">Subtotal: ${{ producto.precioUnitario * producto.cantidad | number:'1.0-0' }}</p>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

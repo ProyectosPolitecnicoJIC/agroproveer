@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit {
         { label: 'Inicio', route: AgroproveerRoutes.HOME },
         { label: 'Mercado', route: AgroproveerRoutes.MERCADO },
         { label: 'Sobre nosotros', route: AgroproveerRoutes.ABOUT },
+        { label: 'Buscar orden', route: AgroproveerRoutes.BUSCAR_ORDEN },
         { label: 'Perfil', route: AgroproveerRoutes.PERFIL },
         { label: 'Cerrar sesión', route: AgroproveerRoutes.LOGOUT }
       ];
@@ -54,6 +55,7 @@ export class HeaderComponent implements OnInit {
       { label: 'Inicio', route: AgroproveerRoutes.HOME },
       { label: 'Mercado', route: AgroproveerRoutes.MERCADO },
       { label: 'Sobre nosotros', route: AgroproveerRoutes.ABOUT },
+      { label: 'Buscar orden', route: AgroproveerRoutes.BUSCAR_ORDEN },
       { label: 'Iniciar sesión', route: AgroproveerRoutes.LOGIN },
       { label: 'Registrarse', route: AgroproveerRoutes.REGISTER }
     ];

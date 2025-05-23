@@ -100,7 +100,11 @@ export class CheckoutComponent implements OnInit {
     });
 
     this.checkoutForm.get('need_domicilio')?.valueChanges.subscribe((needDomicilio) => {
-      this.shippingCost = needDomicilio ? 5000 : 0;
+      if (needDomicilio) {
+        this.shippingCostBasedOnCity();
+      } else {
+        this.shippingCost = 0;
+      }
       this.calculateTotal();
     });
 
@@ -121,7 +125,20 @@ export class CheckoutComponent implements OnInit {
   }
 
   calculateTotal() {
-    this.totalPrice = this.cartItems.reduce((total, item) => total + (item.precio * item.cantidad) + this.shippingCost, 0);
+    this.totalPrice = this.cartItems.reduce((total, item) => total + (item.precio * item.cantidad) , 0)+ this.shippingCost;
+  }
+
+  shippingCostBasedOnCity() {
+    const city = this.getControl('ciudad_comprador').value;
+    this.cartItems.forEach(item => {
+      if (item.municipio === city) {
+        this.shippingCost = 10000;
+        return;
+      } else {
+        this.shippingCost = 15000;
+        return;
+      }
+    });
   }
 
   get documentTypes() {

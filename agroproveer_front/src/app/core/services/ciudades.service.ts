@@ -10,7 +10,7 @@ import { Ciudad } from '../../models/ciudad.interface';
 export class CiudadesService {
 
   readonly URL: string = 'https://api-colombia.com/api/v1/Department/{DEPID}/cities?sortBy=name&sortDirection=asc'
-
+  readonly URL_CIUDADES: string = 'https://api-colombia.com/api/v1/city?sortBy=name&sortDirection=asc'
   constructor(
     private http: HttpClient
   ) { }
@@ -29,4 +29,19 @@ export class CiudadesService {
       )
     )
   }
+
+  getCiudades(): Observable<Ciudad[]> {
+    return this.http.get<any[]>(this.URL_CIUDADES).pipe(
+      map(
+        response => response.map(
+          city => ({
+            id: city.id,
+            name: city.name,
+            departmentId: city.departmentId
+          })
+        )
+      )
+    )
+  }
+  
 }
