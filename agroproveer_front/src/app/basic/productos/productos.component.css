@@ -4,6 +4,120 @@
   background-color: #f8f9fa;
 }
 
+.filters-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
+}
+
+.municipio-filter {
+  min-width: 250px;
+  position: relative;
+}
+
+.municipio-search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.municipio-search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.municipio-search-input:focus {
+  outline: none;
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
+}
+
+.clear-municipio {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  padding: 0 5px;
+  line-height: 1;
+}
+
+.clear-municipio:hover {
+  color: #333;
+}
+
+.municipio-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  margin-top: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.municipio-viewport {
+  height: 300px;
+  width: 100%;
+}
+
+.municipio-option {
+  height: 40px;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.municipio-option:hover {
+  background-color: #f8f9fa;
+}
+
+.municipio-option.selected {
+  background-color: #e8f5e9;
+  color: #2ecc71;
+}
+
+.no-municipios {
+  padding: 0.75rem 1rem;
+  color: #666;
+  text-align: center;
+}
+
 .loading-overlay {
   position: fixed;
   top: 0;

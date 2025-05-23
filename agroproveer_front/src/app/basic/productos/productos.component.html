@@ -6,8 +6,58 @@
   }
 
   @if(!loading){
+  <div class="filters-container">
+    <div class="search-box">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        (ngModelChange)="onSearchChange()"
+        placeholder="Buscar productos..."
+        class="search-input"
+      >
+    </div>
+    <div class="municipio-filter">
+      <div class="municipio-search-container">
+        <input 
+          type="text" 
+          [(ngModel)]="municipioSearchTerm" 
+          (ngModelChange)="onMunicipioSearchChange()"
+          (click)="toggleMunicipioDropdown()"
+          placeholder="Buscar municipio (mínimo 2 caracteres)..."
+          class="municipio-search-input"
+        >
+        @if(selectedMunicipio){
+          <button class="clear-municipio" (click)="clearMunicipioFilter()">×</button>
+        }
+      </div>
+      @if(showMunicipioDropdown){
+        <div class="municipio-dropdown">
+          @if(municipioSearchTerm.length < 2){
+            <div class="no-municipios">
+              Ingresa al menos 2 caracteres para buscar
+            </div>
+          } @else if(filteredMunicipios.length === 0){
+            <div class="no-municipios">
+              No se encontraron municipios
+            </div>
+          } @else {
+            @for(municipio of filteredMunicipios; track municipio){
+              <div 
+                class="municipio-option" 
+                (click)="selectMunicipio(municipio)"
+                [class.selected]="municipio === selectedMunicipio"
+              >
+                {{ municipio }}
+              </div>
+            }
+          }
+        </div>
+      }
+    </div>
+  </div>
+
   <div class="productos-grid">
-    @for(producto of productos; track producto.id){
+    @for(producto of filteredProductos; track producto.id){
     <div class="producto-card">
       <div class="producto-image">
         <img [src]="producto.imagen" [alt]="producto.nombre">
@@ -28,9 +78,9 @@
   </div>
   }
 
-  @if(productos.length === 0){
+  @if(filteredProductos.length === 0){
   <div class="no-products">
-    <p>No hay productos disponibles en este momento.</p>
+    <p>No hay productos disponibles que coincidan con tu búsqueda.</p>
   </div>
   }
 </div>
