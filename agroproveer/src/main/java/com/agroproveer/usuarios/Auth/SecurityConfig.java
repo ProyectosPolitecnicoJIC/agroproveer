@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/usuarios/save").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/venta/sendVenta").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/categoria").permitAll()
+                        .requestMatchers(HttpMethod.GET, "api/venta/*").permitAll()
 
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/auth/login").permitAll()
