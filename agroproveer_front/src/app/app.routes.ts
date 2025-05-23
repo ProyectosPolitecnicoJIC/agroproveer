@@ -13,6 +13,7 @@ import { PerfilComponent } from './basic/perfil/perfil.component';
 import { AgroproveerRoutes } from './utils/enum/routes';
 import { CheckoutsummaryComponent } from './basic/checkoutsummary/checkoutsummary.component';
 import { MyproductsComponent } from './basic/myproducts/myproducts.component';
+import { BuscarOrdenComponent } from './basic/buscar-orden/buscar-orden.component';
 export const routes: Routes = [
     { path: AgroproveerRoutes.REGISTER, component: RegisterComponent },
     { path: AgroproveerRoutes.LOGIN, component: LoginComponent },
@@ -27,5 +28,6 @@ export const routes: Routes = [
     { path: AgroproveerRoutes.PERFIL, component: PerfilComponent }, 
     { path: AgroproveerRoutes.CHECKOUT_SUCCESS, component: CheckoutsummaryComponent },
     { path: AgroproveerRoutes.MYPRODUCTS, component: MyproductsComponent },
+    { path: AgroproveerRoutes.BUSCAR_ORDEN, component: BuscarOrdenComponent },
     {   path: '**', redirectTo: AgroproveerRoutes.HOME } 
 ];

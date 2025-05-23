@@ -15,4 +15,5 @@ export enum AgroproveerRoutes {
     CATEGORIAS = 'categories',
     CARRITO = 'cart',
     MYPRODUCTS = 'my-products',
+    BUSCAR_ORDEN = 'search-order',
 }
